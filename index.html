@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,56 +9,38 @@
 <style>
 
 body{
-background:#0f0f14;
+background:#121212;
+color:purple;
+font-style:italic;
 font-family:Arial;
 margin:0;
-color:#b67aff;
-font-style:italic;
 }
 
 header{
 background:#000;
-padding:25px;
+padding:20px;
 text-align:center;
 }
 
 h1{
-margin:0;
-font-size:35px;
-}
-
-nav{
-background:#15151d;
-padding:15px;
-text-align:center;
-}
-
-nav a{
-color:#b67aff;
-text-decoration:none;
-margin:0 15px;
+color:purple;
 }
 
 .container{
 display:flex;
-flex-wrap:wrap;
 justify-content:center;
+flex-wrap:wrap;
 padding:20px;
-gap:20px;
 }
 
 .producto{
-background:#1b1b25;
-width:260px;
+background:#1e1e1e;
+width:300px;
+margin:20px;
 padding:15px;
-border-radius:12px;
+border-radius:10px;
+box-shadow:0 0 10px black;
 text-align:center;
-box-shadow:0 0 15px rgba(0,0,0,0.6);
-transition:0.3s;
-}
-
-.producto:hover{
-transform:scale(1.05);
 }
 
 .producto img{
@@ -69,55 +50,48 @@ border-radius:10px;
 
 .miniaturas{
 display:flex;
-gap:6px;
-margin-top:8px;
+gap:5px;
+margin-top:5px;
 justify-content:center;
 }
 
 .miniaturas img{
-width:55px;
+width:60px;
 cursor:pointer;
 }
 
 .precio{
 font-size:22px;
-margin:10px 0;
-}
-
-button{
-background:#b67aff;
-border:none;
-padding:10px 15px;
-border-radius:6px;
-cursor:pointer;
 font-weight:bold;
 }
 
-button:hover{
-background:#9c5cff;
+button{
+background:purple;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:5px;
+cursor:pointer;
+margin-top:10px;
 }
 
-.carrito{
+button:hover{
+background:#6a0dad;
+}
+
+#carrito{
 position:fixed;
-top:20px;
-right:20px;
-background:#1b1b25;
+top:10px;
+right:10px;
+background:#1e1e1e;
 padding:15px;
 border-radius:10px;
-width:220px;
+width:200px;
 }
 
-.estrellas{
-color:gold;
-cursor:pointer;
+.estrellas span{
 font-size:20px;
-}
-
-footer{
-background:#000;
-text-align:center;
-padding:20px;
-margin-top:40px;
+cursor:pointer;
 }
 
 </style>
@@ -126,29 +100,16 @@ margin-top:40px;
 <body>
 
 <header>
-
 <h1>Shine-Everyday</h1>
-
-<p>✨ Elegancia que brilla todos los días</p>
-
-<p>Instagram: @shine.everyday</p>
-
+<p>Elegancia que brilla todos los días</p>
 </header>
 
-<nav>
-
-<a href="#">Inicio</a>
-
-</nav>
-
-<div class="carrito">
-
-<h3>🛒 Carrito</h3>
-
-<ul id="lista-carrito"></ul>
-
+<div id="carrito">
+<h3>Carrito</h3>
+<div id="lista"></div>
 <p>Total: $<span id="total">0</span></p>
 
+<button onclick="pagar()">Pagar</button>
 </div>
 
 <section class="container">
@@ -158,72 +119,66 @@ margin-top:40px;
 <img id="img1" src="IMG_9986.jpeg">
 
 <div class="miniaturas">
-
-<img src="IMG_9986.jpeg" onclick="cambiarImagen('img1','IMG_9986.jpeg')">
-<img src="IMG_9990.jpeg" onclick="cambiarImagen('img1','IMG_9990.jpeg')">
-<img src="IMG_9991.jpeg" onclick="cambiarImagen('img1','IMG_9991.jpeg')">
-
+<img src="IMG_9986.jpeg" onclick="cambiar('img1','IMG_9986.jpeg')">
+<img src="IMG_9990.jpeg" onclick="cambiar('img1','IMG_9990.jpeg')">
+<img src="IMG_9991.jpeg" onclick="cambiar('img1','IMG_9991.jpeg')">
 </div>
 
 <h3>Aura Noir</h3>
 
 <p class="precio">$38000</p>
 
-<button onclick="agregarCarrito('Aura Noir',38000)">Agregar al carrito</button>
+<button onclick="agregar('Aura Noir',38000)">
+Agregar al carrito
+</button>
 
-<div class="estrellas" onclick="calificar(this)">★★★★★</div>
+<div class="estrellas">
+<span onclick="rate(1)">⭐</span>
+<span onclick="rate(2)">⭐</span>
+<span onclick="rate(3)">⭐</span>
+<span onclick="rate(4)">⭐</span>
+<span onclick="rate(5)">⭐</span>
+</div>
 
 </div>
 
 </section>
 
-<section style="text-align:center;margin-top:40px">
-
-<h2>Contacto</h2>
-
-<a href="https://wa.me/54935117510656">
-
-<button>Contactar por WhatsApp</button>
-
-</a>
-
-</section>
-
-<footer>
-
-<p>© Shine-Everyday</p>
-
-</footer>
-
 <script>
 
-function cambiarImagen(id,src){
-
-document.getElementById(id).src=src
-
-}
-
+let carrito=[]
 let total=0
 
-function agregarCarrito(nombre,precio){
+function cambiar(id,img){
+document.getElementById(id).src=img
+}
 
-let lista=document.getElementById("lista-carrito")
+function agregar(nombre,precio){
 
-let item=document.createElement("li")
-
-item.textContent=nombre+" - $"+precio
-
-lista.appendChild(item)
+carrito.push({nombre,precio})
 
 total+=precio
 
-document.getElementById("total").textContent=total
+document.getElementById("total").innerText=total
+
+let item=document.createElement("div")
+item.innerText=nombre+" $"+precio
+
+document.getElementById("lista").appendChild(item)
 
 }
 
-function calificar(el){
+function pagar(){
 
-alert("¡Gracias por tu reseña!")
+alert("Total a pagar: $"+total)
+
+window.open("https://mpago.la./2kSu3Mp")
+
+}
+
+function rate(n){
+
+alert("Gracias por tu reseña de "+n+" estrellas")
 
 }
 
