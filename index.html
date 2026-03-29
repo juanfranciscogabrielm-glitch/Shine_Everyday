@@ -1,87 +1,123 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 <meta charset="UTF-8">
-<title>Tienda</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shine-Everyday</title>
 
 <style>
 
 body{
+background:#0f0f14;
 font-family:Arial;
-background:#f5f5f5;
 margin:0;
-padding:0;
+color:#b67aff;
 font-style:italic;
-color:purple;
-transition:0.3s;
-}
-
-.dark{
-background:#121212;
-color:#bb86fc;
 }
 
 header{
-background:#232f3e;
-color:white;
-padding:20px;
+background:#000;
+padding:25px;
 text-align:center;
 }
 
-button{
-background:#ff9900;
-border:none;
-padding:10px;
-border-radius:5px;
-cursor:pointer;
+h1{
+margin:0;
+font-size:35px;
 }
 
-button:hover{
-background:#e68a00;
+nav{
+background:#15151d;
+padding:15px;
+text-align:center;
 }
 
-.productos{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
+nav a{
+color:#b67aff;
+text-decoration:none;
+margin:0 15px;
+}
+
+.container{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
 padding:20px;
+gap:20px;
 }
 
 .producto{
-background:white;
+background:#1b1b25;
+width:260px;
 padding:15px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.2);
+border-radius:12px;
 text-align:center;
+box-shadow:0 0 15px rgba(0,0,0,0.6);
+transition:0.3s;
 }
 
-.dark .producto{
-background:#1e1e1e;
+.producto:hover{
+transform:scale(1.05);
+}
+
+.producto img{
+width:100%;
+border-radius:10px;
+}
+
+.miniaturas{
+display:flex;
+gap:6px;
+margin-top:8px;
+justify-content:center;
+}
+
+.miniaturas img{
+width:55px;
+cursor:pointer;
+}
+
+.precio{
+font-size:22px;
+margin:10px 0;
+}
+
+button{
+background:#b67aff;
+border:none;
+padding:10px 15px;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{
+background:#9c5cff;
 }
 
 .carrito{
 position:fixed;
 top:20px;
 right:20px;
-background:white;
+background:#1b1b25;
 padding:15px;
 border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.3);
-width:200px;
+width:220px;
 }
 
-.dark .carrito{
-background:#1e1e1e;
-}
-
-.estrellas span{
-font-size:20px;
-cursor:pointer;
-color:gray;
-}
-
-.estrellas span.activa{
+.estrellas{
 color:gold;
+cursor:pointer;
+font-size:20px;
+}
+
+footer{
+background:#000;
+text-align:center;
+padding:20px;
+margin-top:40px;
 }
 
 </style>
@@ -90,75 +126,88 @@ color:gold;
 <body>
 
 <header>
-<h1>Mi Tienda</h1>
 
-<button onclick="modoOscuro()">🌙 Modo oscuro</button>
+<h1>Shine-Everyday</h1>
+
+<p>✨ Elegancia que brilla todos los días</p>
+
+<p>Instagram: @shine.everyday</p>
 
 </header>
 
-<div class="productos">
+<nav>
 
-<div class="producto">
+<a href="#">Inicio</a>
 
-<h3>Producto 1</h3>
-<p>$10</p>
-
-<button onclick="agregar('Producto 1',10)">
-Agregar al carrito
-</button>
-
-<div class="estrellas" onclick="calificar(this,event)">
-<span>★</span>
-<span>★</span>
-<span>★</span>
-<span>★</span>
-<span>★</span>
-</div>
-
-<p class="reseña"></p>
-
-</div>
-
-<div class="producto">
-
-<h3>Producto 2</h3>
-<p>$15</p>
-
-<button onclick="agregar('Producto 2',15)">
-Agregar al carrito
-</button>
-
-<div class="estrellas" onclick="calificar(this,event)">
-<span>★</span>
-<span>★</span>
-<span>★</span>
-<span>★</span>
-<span>★</span>
-</div>
-
-<p class="reseña"></p>
-
-</div>
-
-</div>
+</nav>
 
 <div class="carrito">
 
-<h3>Carrito</h3>
+<h3>🛒 Carrito</h3>
 
-<ul id="lista"></ul>
+<ul id="lista-carrito"></ul>
 
 <p>Total: $<span id="total">0</span></p>
 
 </div>
 
+<section class="container">
+
+<div class="producto">
+
+<img id="img1" src="IMG_9986.jpeg">
+
+<div class="miniaturas">
+
+<img src="IMG_9986.jpeg" onclick="cambiarImagen('img1','IMG_9986.jpeg')">
+<img src="IMG_9990.jpeg" onclick="cambiarImagen('img1','IMG_9990.jpeg')">
+<img src="IMG_9991.jpeg" onclick="cambiarImagen('img1','IMG_9991.jpeg')">
+
+</div>
+
+<h3>Aura Noir</h3>
+
+<p class="precio">$38000</p>
+
+<button onclick="agregarCarrito('Aura Noir',38000)">Agregar al carrito</button>
+
+<div class="estrellas" onclick="calificar(this)">★★★★★</div>
+
+</div>
+
+</section>
+
+<section style="text-align:center;margin-top:40px">
+
+<h2>Contacto</h2>
+
+<a href="https://wa.me/54935117510656">
+
+<button>Contactar por WhatsApp</button>
+
+</a>
+
+</section>
+
+<footer>
+
+<p>© Shine-Everyday</p>
+
+</footer>
+
 <script>
+
+function cambiarImagen(id,src){
+
+document.getElementById(id).src=src
+
+}
 
 let total=0
 
-function agregar(nombre,precio){
+function agregarCarrito(nombre,precio){
 
-let lista=document.getElementById("lista")
+let lista=document.getElementById("lista-carrito")
 
 let item=document.createElement("li")
 
@@ -172,28 +221,9 @@ document.getElementById("total").textContent=total
 
 }
 
-function calificar(contenedor,event){
+function calificar(el){
 
-if(event.target.tagName!="SPAN")return
-
-let estrellas=contenedor.querySelectorAll("span")
-
-estrellas.forEach(e=>e.classList.remove("activa"))
-
-let index=[...estrellas].indexOf(event.target)
-
-for(let i=0;i<=index;i++){
-estrellas[i].classList.add("activa")
-}
-
-contenedor.nextElementSibling.textContent=
-"Calificación: "+(index+1)+" estrellas"
-
-}
-
-function modoOscuro(){
-
-document.body.classList.toggle("dark")
+alert("¡Gracias por tu reseña!")
 
 }
 
@@ -201,6 +231,7 @@ document.body.classList.toggle("dark")
 
 </body>
 </html>
+
 
 
 
