@@ -1,236 +1,200 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tienda Online</title>
+<title>Shine Everyday</title>
 
 <style>
+
 body{
-    font-family: Arial, sans-serif;
-    margin:0;
-    background:#f4f4f4;
+margin:0;
+font-family:Arial;
+background:#eaeded;
 }
 
-  header{
-    background: #000000;
-    color: #d4af37;
-    padding:20px;
-    text-align:center;
-}
-  
-nav{
-    background:#111;
-    padding:10px;
-    text-align:center;
+/* HEADER */
+
+header{
+background:#131921;
+color:white;
+padding:10px;
+display:flex;
+align-items:center;
+justify-content:space-between;
 }
 
-
-nav a{
-    color:#d4af37;
-    margin:0 15px;
-    text-decoration:none;
+.logo{
+font-size:22px;
+font-weight:bold;
+color:#ff9900;
 }
+
+.search input{
+padding:8px;
+border:none;
+border-radius:4px;
+}
+
+/* PRODUCTOS */
 
 .container{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    padding:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+padding:15px;
 }
 
 .producto{
-    background:white;
-    width:250px;
-    margin:15px;
-    border-radius:10px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
-    text-align:center;
-    padding:15px;
+background:white;
+padding:10px;
+border-radius:8px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 
 .producto img{
-    width:100%;
-    border-radius:10px;
-}
-
-.producto h3{
-    margin:10px 0;
+width:100%;
+border-radius:6px;
 }
 
 .precio{
-    color:#d4af37;
-    font-size:20px;
-    font-weight:bold;
-
+color:#b12704;
+font-weight:bold;
 }
+
+/* BOTON */
 
 button{
-    background:#d4af37;
-    color:black;
-    border:none;
-    padding:10px 15px;
-    border-radius:5px;
-    cursor:pointer;
-    font-weight:bold;
+background:#ffd814;
+border:1px solid #fcd200;
+padding:8px;
+border-radius:6px;
+cursor:pointer;
+margin-top:5px;
 }
 
-button:hover{
-    background:#b8962e;
+/* ESTRELLAS */
 
-}
-
-footer{
-    background:#111;
-    color:white;
-    text-align:center;
-    padding:15px;
-    margin-top:20px;
-}
-</style producto {
-    transition: 0.3s;
+.estrellas span{
+font-size:20px;
+cursor:pointer;
+color:gray;
 }
 
-.producto:hover {
-    transform: scale(1.05);
+.estrellas span:hover,
+.estrellas span.activa{
+color:gold;
 }
+
+/* RESEÑAS */
+
+.reseñas{
+font-size:13px;
+margin-top:10px;
+border-top:1px solid #ddd;
+padding-top:5px;
+}
+
+.reseña{
+margin-bottom:5px;
+}
+
+</style>
 
 </head>
 
 <body>
 
 <header>
-<h1>Shine-Everyday</h1>
-<p>✨ Elegancia que brilla todos los días
-    <p>Seguinos en Instagram: @shine.everyday</p>
-
-</a>
-
-</p>
+<div class="logo">Shine Everyday</div>
+<div class="search">
+<input type="text" placeholder="Buscar productos...">
+</div>
 </header>
-
-<nav>
-<a href="#">Inicio</a>
-
-
-</nav>
 
 <section class="container">
 
-
 <div class="producto">
-<img src="https://via.placeholder.com/250" alt="Cartera Valencia">
+
+<img src="https://via.placeholder.com/200">
+
 <h3>Valencia</h3>
+
 <p class="precio">$40.000</p>
-<a href=" https://mpago.li/1KJzHMa
-" target="_blank">
-        <button>Comprar</button>
-    </a>
+
+<button>Comprar</button>
+
+<div class="estrellas">
+<span onclick="calificar(this)">★</span>
+<span onclick="calificar(this)">★</span>
+<span onclick="calificar(this)">★</span>
+<span onclick="calificar(this)">★</span>
+<span onclick="calificar(this)">★</span>
 </div>
 
-<div class="producto">
-<img src="https://via.placeholder.com/250" alt="Cartera Roma">
-<h3>Roma</h3>
-<p class="precio">$42.000</p>
-<a href="https://mpago.li./1iVU3HF
-" target="_blank">
-        <button>Comprar</button>
-    </a>
-</div>
-                                                
-<div class="producto">
-    <img src="https://via.placeholder.com/250" alt="Cartera Paris">
-    <h3>Paris</h3>
-    <p class="precio">$38.000</p>
-    <a href="https://mpago.li/2aTmXCL
-" target="_blank">
-    <button>Comprar</button>
-</a>
+<input type="text" placeholder="Escribir reseña..." class="texto">
+
+<button onclick="agregarReseña(this)">Enviar reseña</button>
+
+<div class="reseñas"></div>
 
 </div>
 
-<div class="producto">
-    <img src="https://via.placeholder.com/250" alt="Cartera Dubai">
-    <h3>Dubai</h3>
-    <p></p>
-    <p class="precio">$36.000</p>
-    <a href="https://mpago.li./1kTsf2V
-" target="_blank">
-        <button>Comprar</button>
-    </a>
-</div>
+</section>
 
-<div class="producto">
-    <img src="https://via.placeholder.com/250" alt="Cartera Cherry">
-    <h3>Cherry</h3>
-    <p></p>
-    <p class="precio">$42.000</p>
-    <a href="https://mpago.la./2LiiEsA
-" target="_blank">
-        <button>Comprar</button>
-    </a>
-</div>
+<script>
 
-<div class="producto">
-    <img src="https://via.placeholder.com/250" alt="Tote Bag">
-    <h3>Tote Bag</h3>
-    <p></p>
-    <p class="precio">$45.000</p>
-    <a href="https://mpago.la./2MxHnWs" target="_blank">
-        <button>Comprar</button>
-    </a>
-</div>
+function calificar(estrella){
 
-<div class="producto">
-    <img src="https://via.placeholder.com/250" alt="Cartera New York">
-    <h3>New York</h3>
-    <p></p>
-    <p class="precio">$45.000</p>
-    <a href="https://mpago.la./1REo44V" target="_blank">
-        <button>Comprar</button>
-    </a>
-</div>
+let estrellas = estrella.parentElement.children
 
-<div class="producto">
-    <img src="https://via.placeholder.com/250" alt="Cartera Aura Noir">
-    <h3>Aura Noir</h3>
-    <p></p>
-    <p class="precio">$38.000</p>
-    <a href="https://mpago.la./2kSu3Mp
-" target="_blank">
-        <button>Comprar</button>
-    </a>
-</div>
+for(let i=0;i<estrellas.length;i++){
+estrellas[i].classList.remove("activa")
+}
 
-<div class="producto">
-    <img src="https://via.placeholder.com/250" alt="Cartera Min">
-    <h3>Min</h3>
-    <p></p>
-    <p class="precio">$35.000</p>
-    <a href="https://mpago.la./2HgAxMM
-" target="_blank">
-        <button>Comprar</button>
-    </a>
-</div>
+estrella.classList.add("activa")
 
+let prev = estrella.previousElementSibling
 
-    
-    <h2>Contacto</h2>
-<p>Escribinos para hacer tu pedido:</p>
+while(prev){
+prev.classList.add("activa")
+prev = prev.previousElementSibling
+}
 
-<a href="https://wa.me/54935117510656" target="_blank">
-    <button>Contactar por WhatsApp</button>
-</a>
+}
 
+function agregarReseña(boton){
 
+let producto = boton.parentElement
 
+let texto = producto.querySelector(".texto").value
 
+let estrellas = producto.querySelectorAll(".activa").length
 
+let contenedor = producto.querySelector(".reseñas")
 
+if(texto === "") return
 
+let reseña = document.createElement("div")
 
+reseña.className="reseña"
 
+reseña.innerHTML = "⭐".repeat(estrellas) + " - " + texto
 
+contenedor.appendChild(reseña)
+
+producto.querySelector(".texto").value=""
+
+}
+
+</script>
+
+</body>
+
+</html>
+```
 
 
 
