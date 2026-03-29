@@ -1,7 +1,5 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,191 +8,198 @@
 <style>
 
 body{
-margin:0;
-font-family:Arial;
-background:#eaeded;
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f2f2f2;
 }
 
-/* HEADER */
+/* NAVBAR */
 
-header{
-background:#131921;
-color:white;
-padding:10px;
-display:flex;
-align-items:center;
-justify-content:space-between;
+.navbar{
+    background:#0f1a24;
+    color:white;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .logo{
-font-size:22px;
-font-weight:bold;
-color:#ff9900;
+    font-size:24px;
+    color:orange;
+    font-weight:bold;
 }
 
-.search input{
-padding:8px;
-border:none;
-border-radius:4px;
+.search{
+    padding:8px;
+    width:220px;
+    border-radius:5px;
+    border:none;
 }
 
-/* PRODUCTOS */
+/* CONTENEDOR */
 
 .container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:15px;
-padding:15px;
+    max-width:1200px;
+    margin:auto;
+    padding:30px;
 }
 
-.producto{
-background:white;
-padding:10px;
-border-radius:8px;
-box-shadow:0 2px 8px rgba(0,0,0,0.1);
+/* GRID PRODUCTOS */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
 }
 
-.producto img{
-width:100%;
-border-radius:6px;
+/* TARJETA PRODUCTO */
+
+.card{
+    background:white;
+    border-radius:10px;
+    padding:20px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    transition:0.3s;
 }
 
-.precio{
-color:#b12704;
-font-weight:bold;
+.card:hover{
+    transform:translateY(-5px);
+}
+
+/* IMAGEN */
+
+.card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+/* TITULO */
+
+.card h3{
+    margin:10px 0;
+}
+
+/* PRECIO */
+
+.price{
+    color:#e63900;
+    font-size:20px;
+    font-weight:bold;
 }
 
 /* BOTON */
 
-button{
-background:#ffd814;
-border:1px solid #fcd200;
-padding:8px;
-border-radius:6px;
-cursor:pointer;
-margin-top:5px;
+.buy{
+    background:#ffc107;
+    border:none;
+    padding:10px 15px;
+    border-radius:6px;
+    cursor:pointer;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+.buy:hover{
+    background:#ffb300;
 }
 
 /* ESTRELLAS */
 
-.estrellas span{
-font-size:20px;
-cursor:pointer;
-color:gray;
-}
-
-.estrellas span:hover,
-.estrellas span.activa{
-color:gold;
+.stars{
+    color:gold;
+    margin:10px 0;
+    font-size:18px;
 }
 
 /* RESEÑAS */
 
-.reseñas{
-font-size:13px;
-margin-top:10px;
-border-top:1px solid #ddd;
-padding-top:5px;
+.review-box{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
 }
 
-.reseña{
-margin-bottom:5px;
+.review-box input{
+    flex:1;
+    padding:6px;
+}
+
+.review-box button{
+    background:#ffc107;
+    border:none;
+    padding:6px 10px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.reviews{
+    margin-top:10px;
+    font-size:14px;
+    color:#555;
 }
 
 </style>
-
 </head>
 
 <body>
 
-<header>
+<div class="navbar">
 <div class="logo">Shine Everyday</div>
-<div class="search">
-<input type="text" placeholder="Buscar productos...">
+<input class="search" placeholder="Buscar productos...">
 </div>
-</header>
 
-<section class="container">
+<div class="container">
 
-<div class="producto">
+<div class="products">
 
-<img src="https://via.placeholder.com/200">
+<div class="card">
+
+<img src="https://picsum.photos/400/300">
 
 <h3>Valencia</h3>
 
-<p class="precio">$40.000</p>
+<div class="price">$40.000</div>
 
-<button>Comprar</button>
+<button class="buy">Comprar</button>
 
-<div class="estrellas">
-<span onclick="calificar(this)">★</span>
-<span onclick="calificar(this)">★</span>
-<span onclick="calificar(this)">★</span>
-<span onclick="calificar(this)">★</span>
-<span onclick="calificar(this)">★</span>
+<div class="stars">★★★★★</div>
+
+<div class="review-box">
+<input type="text" placeholder="Escribir reseña..." id="reviewInput">
+<button onclick="addReview()">Enviar</button>
 </div>
 
-<input type="text" placeholder="Escribir reseña..." class="texto">
-
-<button onclick="agregarReseña(this)">Enviar reseña</button>
-
-<div class="reseñas"></div>
+<div class="reviews" id="reviews"></div>
 
 </div>
 
-</section>
+</div>
+
+</div>
 
 <script>
 
-function calificar(estrella){
+function addReview(){
 
-let estrellas = estrella.parentElement.children
+let input = document.getElementById("reviewInput");
+let reviews = document.getElementById("reviews");
 
-for(let i=0;i<estrellas.length;i++){
-estrellas[i].classList.remove("activa")
+if(input.value.trim() !== ""){
+let p = document.createElement("p");
+p.textContent = "🗨 " + input.value;
+reviews.appendChild(p);
+input.value="";
 }
-
-estrella.classList.add("activa")
-
-let prev = estrella.previousElementSibling
-
-while(prev){
-prev.classList.add("activa")
-prev = prev.previousElementSibling
-}
-
-}
-
-function agregarReseña(boton){
-
-let producto = boton.parentElement
-
-let texto = producto.querySelector(".texto").value
-
-let estrellas = producto.querySelectorAll(".activa").length
-
-let contenedor = producto.querySelector(".reseñas")
-
-if(texto === "") return
-
-let reseña = document.createElement("div")
-
-reseña.className="reseña"
-
-reseña.innerHTML = "⭐".repeat(estrellas) + " - " + texto
-
-contenedor.appendChild(reseña)
-
-producto.querySelector(".texto").value=""
 
 }
 
 </script>
 
 </body>
-
 </html>
-```
 
 
 
