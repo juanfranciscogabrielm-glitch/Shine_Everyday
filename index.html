@@ -1,248 +1,207 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Shine Everyday</title>
+<title>Tienda</title>
 
 <style>
 
 body{
-font-family: Arial, sans-serif;
+font-family:Arial;
+background:#f5f5f5;
 margin:0;
-background:#f4f4f4;
+padding:0;
+font-style:italic;
+color:purple;
+transition:0.3s;
 }
 
-/* HEADER */
+.dark{
+background:#121212;
+color:#bb86fc;
+}
 
 header{
-background:#000;
-color:#d4af37;
+background:#232f3e;
+color:white;
 padding:20px;
 text-align:center;
 }
 
-/* NAV */
-
-nav{
-background:#111;
+button{
+background:#ff9900;
+border:none;
 padding:10px;
-text-align:center;
+border-radius:5px;
+cursor:pointer;
 }
 
-nav a{
-color:#d4af37;
-margin:0 15px;
-text-decoration:none;
-font-weight:bold;
+button:hover{
+background:#e68a00;
 }
 
-/* PRODUCTOS */
-
-.container{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
+.productos{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
 padding:20px;
 }
 
 .producto{
 background:white;
-width:250px;
-margin:15px;
-border-radius:10px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-text-align:center;
 padding:15px;
-transition:0.3s;
-}
-
-.producto:hover{
-transform:scale(1.05);
-}
-
-.producto img{
-width:100%;
 border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+text-align:center;
 }
 
-.producto h3{
-margin:10px 0;
+.dark .producto{
+background:#1e1e1e;
 }
 
-.precio{
-color:#d4af37;
+.carrito{
+position:fixed;
+top:20px;
+right:20px;
+background:white;
+padding:15px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.3);
+width:200px;
+}
+
+.dark .carrito{
+background:#1e1e1e;
+}
+
+.estrellas span{
 font-size:20px;
-font-weight:bold;
-}
-
-/* BOTONES */
-
-button{
-background:#d4af37;
-color:black;
-border:none;
-padding:10px 15px;
-border-radius:5px;
 cursor:pointer;
-font-weight:bold;
+color:gray;
 }
 
-button:hover{
-background:#b8962e;
-}
-
-/* CONTACTO */
-
-.contacto{
-text-align:center;
-padding:40px;
-}
-
-/* FOOTER */
-
-footer{
-background:#111;
-color:white;
-text-align:center;
-padding:15px;
-margin-top:20px;
+.estrellas span.activa{
+color:gold;
 }
 
 </style>
-
 </head>
 
 <body>
 
 <header>
+<h1>Mi Tienda</h1>
 
-<h1>Shine Everyday</h1>
-
-<p>✨ Elegancia que brilla todos los días</p>
-
-<p>Seguinos en Instagram: @shine.everyday</p>
+<button onclick="modoOscuro()">🌙 Modo oscuro</button>
 
 </header>
 
-<nav>
-
-<a href="#">Inicio</a>
-
-</nav>
-
-<section class="container">
-
-<!-- PRODUCTO -->
+<div class="productos">
 
 <div class="producto">
-<img src="https://via.placeholder.com/250" alt="Valencia">
-<h3>Valencia</h3>
-<p class="precio">$40.000</p>
-<a href="https://mpago.li/1KJzHMa" target="_blank">
-<button>Comprar</button>
-</a>
+
+<h3>Producto 1</h3>
+<p>$10</p>
+
+<button onclick="agregar('Producto 1',10)">
+Agregar al carrito
+</button>
+
+<div class="estrellas" onclick="calificar(this,event)">
+<span>★</span>
+<span>★</span>
+<span>★</span>
+<span>★</span>
+<span>★</span>
+</div>
+
+<p class="reseña"></p>
+
 </div>
 
 <div class="producto">
-<img src="https://via.placeholder.com/250" alt="Roma">
-<h3>Roma</h3>
-<p class="precio">$42.000</p>
-<a href="https://mpago.li/1iVU3HF" target="_blank">
-<button>Comprar</button>
-</a>
+
+<h3>Producto 2</h3>
+<p>$15</p>
+
+<button onclick="agregar('Producto 2',15)">
+Agregar al carrito
+</button>
+
+<div class="estrellas" onclick="calificar(this,event)">
+<span>★</span>
+<span>★</span>
+<span>★</span>
+<span>★</span>
+<span>★</span>
 </div>
 
-<div class="producto">
-<img src="https://via.placeholder.com/250" alt="Paris">
-<h3>Paris</h3>
-<p class="precio">$38.000</p>
-<a href="https://mpago.li/2aTmXCL" target="_blank">
-<button>Comprar</button>
-</a>
+<p class="reseña"></p>
+
 </div>
 
-<div class="producto">
-<img src="https://via.placeholder.com/250" alt="Dubai">
-<h3>Dubai</h3>
-<p class="precio">$36.000</p>
-<a href="https://mpago.li/1kTsf2V" target="_blank">
-<button>Comprar</button>
-</a>
 </div>
 
-<div class="producto">
-<img src="https://via.placeholder.com/250" alt="Cherry">
-<h3>Cherry</h3>
-<p class="precio">$42.000</p>
-<a href="https://mpago.la/2LiiEsA" target="_blank">
-<button>Comprar</button>
-</a>
+<div class="carrito">
+
+<h3>Carrito</h3>
+
+<ul id="lista"></ul>
+
+<p>Total: $<span id="total">0</span></p>
+
 </div>
 
-<div class="producto">
-<img src="https://via.placeholder.com/250" alt="Tote Bag">
-<h3>Tote Bag</h3>
-<p class="precio">$45.000</p>
-<a href="https://mpago.la/2MxHnWs" target="_blank">
-<button>Comprar</button>
-</a>
-</div>
+<script>
 
-<div class="producto">
-<img src="https://via.placeholder.com/250" alt="New York">
-<h3>New York</h3>
-<p class="precio">$45.000</p>
-<a href="https://mpago.la/1REo44V" target="_blank">
-<button>Comprar</button>
-</a>
-</div>
+let total=0
 
-<div class="producto">
-<img src="https://via.placeholder.com/250" alt="Aura Noir">
-<h3>Aura Noir</h3>
-<p class="precio">$38.000</p>
-<a href="https://mpago.la/2kSu3Mp" target="_blank">
-<button>Comprar</button>
-</a>
-</div>
+function agregar(nombre,precio){
 
-<div class="producto">
-<img src="https://via.placeholder.com/250" alt="Min">
-<h3>Min</h3>
-<p class="precio">$35.000</p>
-<a href="https://mpago.la/2HgAxMM" target="_blank">
-<button>Comprar</button>
-</a>
-</div>
+let lista=document.getElementById("lista")
 
-</section>
+let item=document.createElement("li")
 
-<section class="contacto">
+item.textContent=nombre+" - $"+precio
 
-<h2>Contacto</h2>
+lista.appendChild(item)
 
-<p>Escribinos para hacer tu pedido:</p>
+total+=precio
 
-<a href="https://wa.me/54935117510656" target="_blank">
+document.getElementById("total").textContent=total
 
-<button>Contactar por WhatsApp</button>
+}
 
-</a>
+function calificar(contenedor,event){
 
-</section>
+if(event.target.tagName!="SPAN")return
 
-<footer>
+let estrellas=contenedor.querySelectorAll("span")
 
-<p>© 2026 Shine Everyday</p>
+estrellas.forEach(e=>e.classList.remove("activa"))
 
-</footer>
+let index=[...estrellas].indexOf(event.target)
+
+for(let i=0;i<=index;i++){
+estrellas[i].classList.add("activa")
+}
+
+contenedor.nextElementSibling.textContent=
+"Calificación: "+(index+1)+" estrellas"
+
+}
+
+function modoOscuro(){
+
+document.body.classList.toggle("dark")
+
+}
+
+</script>
 
 </body>
 </html>
+
 
 
 
