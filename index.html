@@ -1,242 +1,248 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Shine Everyday</title>
 
 <style>
 
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-}
-
 body{
-font-family:Arial, Helvetica, sans-serif;
+font-family: Arial, sans-serif;
+margin:0;
 background:#f4f4f4;
 }
 
-/* NAVBAR */
+/* HEADER */
 
-.navbar{
-background:#0f1a24;
-color:white;
-padding:12px 20px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-flex-wrap:wrap;
+header{
+background:#000;
+color:#d4af37;
+padding:20px;
+text-align:center;
 }
 
-.logo{
-color:orange;
+/* NAV */
+
+nav{
+background:#111;
+padding:10px;
+text-align:center;
+}
+
+nav a{
+color:#d4af37;
+margin:0 15px;
+text-decoration:none;
+font-weight:bold;
+}
+
+/* PRODUCTOS */
+
+.container{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+padding:20px;
+}
+
+.producto{
+background:white;
+width:250px;
+margin:15px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+text-align:center;
+padding:15px;
+transition:0.3s;
+}
+
+.producto:hover{
+transform:scale(1.05);
+}
+
+.producto img{
+width:100%;
+border-radius:10px;
+}
+
+.producto h3{
+margin:10px 0;
+}
+
+.precio{
+color:#d4af37;
 font-size:20px;
 font-weight:bold;
 }
 
-.search{
-padding:7px;
+/* BOTONES */
+
+button{
+background:#d4af37;
+color:black;
+border:none;
+padding:10px 15px;
 border-radius:5px;
-border:none;
-width:180px;
+cursor:pointer;
+font-weight:bold;
 }
 
-/* CONTENEDOR */
-
-.container{
-max-width:1100px;
-margin:auto;
-padding:20px;
+button:hover{
+background:#b8962e;
 }
 
-/* GRID */
+/* CONTACTO */
 
-.products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-}
-
-/* TARJETA */
-
-.card{
-background:white;
-border-radius:8px;
-padding:15px;
-box-shadow:0 2px 8px rgba(0,0,0,0.1);
+.contacto{
 text-align:center;
-transition:0.2s;
+padding:40px;
 }
 
-.card:hover{
-transform:scale(1.02);
-}
+/* FOOTER */
 
-/* IMAGEN PEQUEÑA */
-
-.card img{
-width:100%;
-max-height:120px;
-object-fit:cover;
-border-radius:6px;
-margin-bottom:10px;
-}
-
-/* TITULO */
-
-.card h3{
-font-size:18px;
-margin-bottom:5px;
-}
-
-/* PRECIO */
-
-.price{
-color:#e63900;
-font-weight:bold;
-margin-bottom:8px;
-}
-
-/* BOTON */
-
-.buy{
-background:#ffc107;
-border:none;
-padding:8px 12px;
-border-radius:6px;
-cursor:pointer;
-margin-bottom:10px;
-font-weight:bold;
-}
-
-.buy:hover{
-background:#ffb300;
-}
-
-/* ESTRELLAS */
-
-.stars{
-color:gold;
-margin-bottom:8px;
-}
-
-/* RESEÑA */
-
-.review-box{
-display:flex;
-gap:5px;
-}
-
-.review-box input{
-flex:1;
-padding:5px;
-font-size:12px;
-}
-
-.review-box button{
-padding:5px 8px;
-background:#ffc107;
-border:none;
-border-radius:4px;
-cursor:pointer;
-}
-
-.reviews{
-margin-top:8px;
-font-size:12px;
-text-align:left;
-}
-
-/* RESPONSIVE */
-
-@media (max-width:600px){
-
-.logo{
-font-size:18px;
-}
-
-.search{
-width:100%;
-margin-top:10px;
-}
-
-.navbar{
-flex-direction:column;
-align-items:flex-start;
-}
-
+footer{
+background:#111;
+color:white;
+text-align:center;
+padding:15px;
+margin-top:20px;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div class="navbar">
+<header>
 
-<div class="logo">Shine Everyday</div>
+<h1>Shine Everyday</h1>
 
-<input class="search" placeholder="Buscar productos...">
+<p>✨ Elegancia que brilla todos los días</p>
 
-</div>
+<p>Seguinos en Instagram: @shine.everyday</p>
 
-<div class="container">
+</header>
 
-<div class="products">
+<nav>
 
-<div class="card">
+<a href="#">Inicio</a>
 
-<img src="https://picsum.photos/300/200">
+</nav>
 
+<section class="container">
+
+<!-- PRODUCTO -->
+
+<div class="producto">
+<img src="https://via.placeholder.com/250" alt="Valencia">
 <h3>Valencia</h3>
-
-<div class="price">$40.000</div>
-
-<button class="buy">Comprar</button>
-
-<div class="stars">★★★★★</div>
-
-<div class="review-box">
-<input id="reviewInput" placeholder="Reseña...">
-<button onclick="addReview()">Enviar</button>
+<p class="precio">$40.000</p>
+<a href="https://mpago.li/1KJzHMa" target="_blank">
+<button>Comprar</button>
+</a>
 </div>
 
-<div class="reviews" id="reviews"></div>
-
+<div class="producto">
+<img src="https://via.placeholder.com/250" alt="Roma">
+<h3>Roma</h3>
+<p class="precio">$42.000</p>
+<a href="https://mpago.li/1iVU3HF" target="_blank">
+<button>Comprar</button>
+</a>
 </div>
 
+<div class="producto">
+<img src="https://via.placeholder.com/250" alt="Paris">
+<h3>Paris</h3>
+<p class="precio">$38.000</p>
+<a href="https://mpago.li/2aTmXCL" target="_blank">
+<button>Comprar</button>
+</a>
 </div>
 
+<div class="producto">
+<img src="https://via.placeholder.com/250" alt="Dubai">
+<h3>Dubai</h3>
+<p class="precio">$36.000</p>
+<a href="https://mpago.li/1kTsf2V" target="_blank">
+<button>Comprar</button>
+</a>
 </div>
 
-<script>
+<div class="producto">
+<img src="https://via.placeholder.com/250" alt="Cherry">
+<h3>Cherry</h3>
+<p class="precio">$42.000</p>
+<a href="https://mpago.la/2LiiEsA" target="_blank">
+<button>Comprar</button>
+</a>
+</div>
 
-function addReview(){
+<div class="producto">
+<img src="https://via.placeholder.com/250" alt="Tote Bag">
+<h3>Tote Bag</h3>
+<p class="precio">$45.000</p>
+<a href="https://mpago.la/2MxHnWs" target="_blank">
+<button>Comprar</button>
+</a>
+</div>
 
-let input = document.getElementById("reviewInput");
-let reviews = document.getElementById("reviews");
+<div class="producto">
+<img src="https://via.placeholder.com/250" alt="New York">
+<h3>New York</h3>
+<p class="precio">$45.000</p>
+<a href="https://mpago.la/1REo44V" target="_blank">
+<button>Comprar</button>
+</a>
+</div>
 
-if(input.value.trim() !== ""){
+<div class="producto">
+<img src="https://via.placeholder.com/250" alt="Aura Noir">
+<h3>Aura Noir</h3>
+<p class="precio">$38.000</p>
+<a href="https://mpago.la/2kSu3Mp" target="_blank">
+<button>Comprar</button>
+</a>
+</div>
 
-let p = document.createElement("p");
-p.textContent = "• " + input.value;
+<div class="producto">
+<img src="https://via.placeholder.com/250" alt="Min">
+<h3>Min</h3>
+<p class="precio">$35.000</p>
+<a href="https://mpago.la/2HgAxMM" target="_blank">
+<button>Comprar</button>
+</a>
+</div>
 
-reviews.appendChild(p);
+</section>
 
-input.value="";
+<section class="contacto">
 
-}
+<h2>Contacto</h2>
 
-}
+<p>Escribinos para hacer tu pedido:</p>
 
-</script>
+<a href="https://wa.me/54935117510656" target="_blank">
+
+<button>Contactar por WhatsApp</button>
+
+</a>
+
+</section>
+
+<footer>
+
+<p>© 2026 Shine Everyday</p>
+
+</footer>
 
 </body>
 </html>
-
-
 
 
 
