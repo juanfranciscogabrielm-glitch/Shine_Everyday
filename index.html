@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Shein bag y accesorios</title>
+<title>Tienda Mayorista</title>
 
 <style>
 
+/* VARIABLES */
+
 :root{
 --gold:#d4af37;
---dark:#0f0f0f;
+--dark:#111;
 --light:#ffffff;
+--gray:#f5f5f5;
 }
-
-/* GENERAL */
 
 *{
 margin:0;
@@ -24,7 +24,7 @@ font-family:Arial;
 }
 
 body{
-background:#f5f5f5;
+background:var(--gray);
 transition:0.3s;
 }
 
@@ -35,34 +35,35 @@ background:#0f0f0f;
 color:white;
 }
 
-body.dark .card{
-background:#1c1c1c;
-border:none;
-}
-
 /* HEADER */
 
 header{
-background:black;
+background:var(--dark);
 color:white;
-padding:15px;
+padding:15px 40px;
 display:flex;
-justify-content:space-between;
 align-items:center;
+justify-content:space-between;
 flex-wrap:wrap;
 }
 
 .logo{
-color:var(--gold);
 font-size:24px;
+color:var(--gold);
 font-weight:bold;
 }
 
 .search{
-padding:8px;
-border-radius:5px;
+flex:1;
+max-width:400px;
+margin:10px;
+}
+
+.search input{
+width:100%;
+padding:10px;
+border-radius:6px;
 border:none;
-width:220px;
 }
 
 /* BOTONES HEADER */
@@ -70,7 +71,6 @@ width:220px;
 .header-buttons{
 display:flex;
 gap:10px;
-align-items:center;
 }
 
 .btn{
@@ -82,22 +82,49 @@ cursor:pointer;
 font-weight:bold;
 }
 
-.btn:hover{
-opacity:0.9;
+/* MENU */
+
+.menu{
+background:#1c1c1c;
+color:white;
+display:flex;
+gap:25px;
+padding:10px 40px;
+flex-wrap:wrap;
+}
+
+.menu a{
+color:white;
+text-decoration:none;
+font-size:14px;
+}
+
+/* BANNER */
+
+.banner{
+height:250px;
+background:linear-gradient(90deg,#d4af37,#ffcc33);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+font-weight:bold;
+}
+
+/* CONTENEDOR */
+
+.container{
+max-width:1300px;
+margin:auto;
+padding:30px;
 }
 
 /* PRODUCTOS */
 
-.container{
-max-width:1200px;
-margin:auto;
-padding:20px;
-}
-
 .products{
 display:grid;
 grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-gap:20px;
+gap:25px;
 }
 
 .card{
@@ -108,9 +135,14 @@ border:1px solid #ddd;
 text-align:center;
 }
 
+body.dark .card{
+background:#1c1c1c;
+border:none;
+}
+
 .card img{
 width:100%;
-height:150px;
+height:180px;
 object-fit:contain;
 }
 
@@ -118,20 +150,7 @@ object-fit:contain;
 color:var(--gold);
 font-size:20px;
 font-weight:bold;
-}
-
-/* ADMIN */
-
-.admin{
-background:white;
-padding:20px;
-margin:20px;
-border-radius:8px;
-}
-
-.admin input{
-padding:8px;
-margin:5px;
+margin:10px 0;
 }
 
 /* CARRITO */
@@ -146,10 +165,35 @@ background:white;
 border-left:1px solid #ccc;
 padding:20px;
 overflow:auto;
+display:none;
 }
 
 body.dark .cartBox{
 background:#1c1c1c;
+}
+
+/* PANEL ADMIN */
+
+.admin{
+background:white;
+padding:20px;
+margin:20px;
+border-radius:8px;
+}
+
+.admin input{
+padding:8px;
+margin:5px;
+}
+
+/* FOOTER */
+
+footer{
+background:#111;
+color:white;
+text-align:center;
+padding:30px;
+margin-top:40px;
 }
 
 </style>
@@ -161,7 +205,9 @@ background:#1c1c1c;
 
 <div class="logo">Tienda Gold</div>
 
-<input class="search" placeholder="Buscar..." onkeyup="searchProducts()">
+<div class="search">
+<input placeholder="Buscar productos..." onkeyup="searchProducts()">
+</div>
 
 <div class="header-buttons">
 
@@ -176,6 +222,21 @@ background:#1c1c1c;
 </div>
 
 </header>
+
+<div class="menu">
+
+<a href="#">Inicio</a>
+<a href="#">Ofertas</a>
+<a href="#">Tecnología</a>
+<a href="#">Ropa</a>
+<a href="#">Hogar</a>
+<a href="#">Contacto</a>
+
+</div>
+
+<div class="banner">
+OFERTAS MAYORISTAS
+</div>
 
 <div class="container">
 
@@ -193,13 +254,13 @@ background:#1c1c1c;
 <input id="price" placeholder="Precio">
 <input id="image" placeholder="URL imagen">
 
-<button class="btn" onclick="addProduct()">Agregar</button>
+<button class="btn" onclick="addProduct()">Agregar producto</button>
 
 </div>
 
 <!-- CARRITO -->
 
-<div class="cartBox" id="cartBox" style="display:none">
+<div class="cartBox" id="cartBox">
 
 <h3>Carrito</h3>
 
@@ -217,6 +278,12 @@ Pagar con Mercado Pago
 
 </div>
 
+<footer>
+
+Síguenos en Instagram
+
+</footer>
+
 <script>
 
 let products = JSON.parse(localStorage.getItem("products")) || [];
@@ -229,8 +296,7 @@ localStorage.setItem("cart",JSON.stringify(cart));
 
 function renderProducts(){
 
-let container = document.getElementById("products");
-
+let container=document.getElementById("products");
 container.innerHTML="";
 
 products.forEach((p,i)=>{
@@ -243,9 +309,9 @@ container.innerHTML+=`
 
 <h3>${p.name}</h3>
 
-<div class="price">$${p.price}</div>
-
 <div>⭐⭐⭐⭐⭐</div>
+
+<div class="price">$${p.price}</div>
 
 <button class="btn" onclick="addCart(${i})">
 Agregar al carrito
@@ -284,7 +350,6 @@ renderCart();
 function renderCart(){
 
 let items=document.getElementById("cartItems");
-
 let total=0;
 
 items.innerHTML="";
@@ -292,7 +357,6 @@ items.innerHTML="";
 cart.forEach(p=>{
 
 items.innerHTML+=`<p>${p.name} - $${p.price}</p>`;
-
 total+=Number(p.price);
 
 });
@@ -305,7 +369,7 @@ function toggleCart(){
 
 let cart=document.getElementById("cartBox");
 
-cart.style.display=cart.style.display=="none"?"block":"none";
+cart.style.display=cart.style.display=="block"?"none":"block";
 
 renderCart();
 
@@ -313,7 +377,7 @@ renderCart();
 
 function searchProducts(){
 
-let input=document.querySelector(".search").value.toLowerCase();
+let input=document.querySelector(".search input").value.toLowerCase();
 
 let cards=document.querySelectorAll(".card");
 
@@ -340,4 +404,3 @@ renderCart();
 
 </body>
 </html>
-
