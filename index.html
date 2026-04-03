@@ -1,73 +1,73 @@
-# Clonamos o creamos la carpeta local
+# Crear carpeta y entrar
 mkdir carteras-web
 cd carteras-web
 
-# Inicializamos git
+# Inicializar Git
 git init
 
-# Creamos archivo principal
+# Crear archivo index.html con contenido listo
 cat > index.html << EOL
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carteras Mayorista</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    header { background: #f39c12; color: white; padding: 20px; text-align: center; }
-    .productos { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
-    .producto { border: 1px solid #ddd; margin: 10px; padding: 10px; width: 200px; text-align: center; }
-    .producto img { width: 100%; height: auto; }
-    footer { background: #333; color: white; text-align: center; padding: 10px; }
-    .btn { background: #27ae60; color: white; padding: 10px; text-decoration: none; display: inline-block; margin-top: 10px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carteras Mayorista</title>
+<style>
+body { font-family: Arial, sans-serif; margin:0; padding:0; }
+header { background:#f39c12; color:white; padding:20px; text-align:center; }
+.productos { display:flex; flex-wrap:wrap; justify-content:center; padding:20px; }
+.producto { border:1px solid #ddd; margin:10px; padding:10px; width:200px; text-align:center; }
+.producto img { width:100%; height:auto; }
+footer { background:#333; color:white; text-align:center; padding:10px; }
+.btn { background:#27ae60; color:white; padding:10px; text-decoration:none; display:inline-block; margin-top:10px; }
+</style>
 </head>
 <body>
 
 <header>
-  <h1>Carteras Mayorista</h1>
-  <p>Venta de carteras al por mayor y menor</p>
+<h1>Carteras Mayorista</h1>
+<p>Venta de carteras al por mayor y menor</p>
 </header>
 
 <section class="productos">
-  <div class="producto">
-    <img src="cartera1.jpg" alt="Cartera Eco Cuero">
-    <h3>Cartera Eco Cuero</h3>
-    <p>$1500</p>
-    <a class="btn" href="https://wa.me/TU_NUMERO">Comprar por WhatsApp</a>
-  </div>
-  <div class="producto">
-    <img src="cartera2.jpg" alt="Bandolera Urbana">
-    <h3>Bandolera Urbana</h3>
-    <p>$1800</p>
-    <a class="btn" href="https://wa.me/TU_NUMERO">Comprar por WhatsApp</a>
-  </div>
-  <div class="producto">
-    <img src="cartera3.jpg" alt="Mochila Casual">
-    <h3>Mochila Casual</h3>
-    <p>$2000</p>
-    <a class="btn" href="https://wa.me/TU_NUMERO">Comprar por WhatsApp</a>
-  </div>
+<div class="producto">
+<img src="cartera1.jpg" alt="Cartera Eco Cuero">
+<h3>Cartera Eco Cuero</h3>
+<p>$1500</p>
+<a class="btn" href="https://wa.me/5491112345678">Comprar por WhatsApp</a>
+</div>
+<div class="producto">
+<img src="cartera2.jpg" alt="Bandolera Urbana">
+<h3>Bandolera Urbana</h3>
+<p>$1800</p>
+<a class="btn" href="https://wa.me/5491112345678">Comprar por WhatsApp</a>
+</div>
+<div class="producto">
+<img src="cartera3.jpg" alt="Mochila Casual">
+<h3>Mochila Casual</h3>
+<p>$2000</p>
+<a class="btn" href="https://wa.me/5491112345678">Comprar por WhatsApp</a>
+</div>
 </section>
 
 <footer>
-  <p>Contactanos: WhatsApp +54 XXX XXX XXXX | Instagram @tuusuario</p>
+<p>Contactanos: WhatsApp +54 911 1234 5678 | Instagram @carterasmayorista</p>
 </footer>
 
 </body>
 </html>
 EOL
 
-# Creamos archivos de imagen de ejemplo
+# Crear archivos de imagen de ejemplo
 touch cartera1.jpg cartera2.jpg cartera3.jpg
 
-# Commit inicial
+# Hacer commit inicial
 git add .
 git commit -m "Primera versión tienda de carteras"
 
-# Crear repositorio remoto (reemplaza TU_USUARIO y TU_REPO)
-git remote add origin https://github.com/TU_USUARIO/carteras-web.git
+# Conectar con repositorio remoto de ejemplo
+git remote add origin https://github.com/ejemplo/carteras-web.git
 git branch -M main
 git push -u origin main
 
