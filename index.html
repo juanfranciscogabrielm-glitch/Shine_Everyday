@@ -6,72 +6,99 @@
 <title>Shine Bag y Accesorios</title>
 
 <style>
+:root{
+  --dorado:#d4af37;
+  --fondo:#0f0f0f;
+  --card:#1a1a1a;
+}
+
+*{box-sizing:border-box}
 
 body{
 margin:0;
-font-family:Arial;
-background:#0f0f0f;
+font-family:Arial, Helvetica, sans-serif;
+background:var(--fondo);
 color:white;
 }
 
 header{
 display:flex;
-justify-content:space-between;
 align-items:center;
-padding:15px;
-background:black;
-border-bottom:2px solid #d4af37;
+justify-content:space-between;
+gap:10px;
+padding:12px 16px;
+background:#000;
+border-bottom:2px solid var(--dorado);
+position:sticky;
+top:0;
+z-index:1000;
 }
 
 .logo{
 font-size:22px;
-color:#d4af37;
 font-weight:bold;
+color:var(--dorado);
 }
 
 #buscador{
-width:40%;
+flex:1;
+max-width:450px;
 padding:10px;
 border-radius:8px;
 border:none;
+outline:none;
 }
 
-.carrito{
+.carritoBtn{
 cursor:pointer;
-font-size:20px;
-color:#d4af37;
+color:var(--dorado);
+font-size:18px;
 }
 
 .banner{
 text-align:center;
-padding:40px;
+padding:35px 15px;
 background:#111;
-border-bottom:2px solid #d4af37;
+border-bottom:2px solid var(--dorado);
 }
 
 .banner h1{
-color:#d4af37;
-font-size:38px;
+margin:0;
+font-size:36px;
+color:var(--dorado);
+}
+
+.banner p{
+opacity:.8;
 }
 
 .filtros{
-padding:10px;
 text-align:center;
+padding:12px;
+}
+
+.filtros button{
+margin:5px;
+padding:8px 12px;
+border:none;
+border-radius:6px;
+background:var(--dorado);
+cursor:pointer;
 }
 
 .productos{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 gap:20px;
 padding:20px;
 }
 
 .producto{
-background:#1a1a1a;
+background:var(--card);
 padding:15px;
 border-radius:10px;
 text-align:center;
-transition:0.3s;
+transition:.25s;
 }
 
 .producto:hover{
@@ -82,85 +109,113 @@ transform:scale(1.05);
 width:100%;
 height:180px;
 object-fit:cover;
-border-radius:10px;
+border-radius:8px;
 }
 
 .precio{
-color:#d4af37;
+color:var(--dorado);
 font-size:18px;
+margin:5px 0;
 }
 
 .estrellas{
 color:gold;
 }
 
-button{
-background:#d4af37;
-border:none;
-padding:10px;
-border-radius:6px;
-cursor:pointer;
+.producto button{
 margin:5px;
+padding:8px 10px;
+border:none;
+border-radius:6px;
+background:var(--dorado);
+cursor:pointer;
 }
 
 footer{
 text-align:center;
 padding:20px;
-border-top:2px solid #d4af37;
+border-top:2px solid var(--dorado);
+margin-top:20px;
 }
 
-a{
-color:#d4af37;
+footer a{
+color:var(--dorado);
 text-decoration:none;
 }
 
+/* carrito */
+
 #carritoPanel{
 position:fixed;
-right:-320px;
+right:-360px;
 top:0;
-width:300px;
+width:330px;
 height:100%;
 background:#111;
 padding:20px;
-transition:0.3s;
-border-left:2px solid #d4af37;
-overflow:auto;
+transition:.35s;
+border-left:3px solid var(--dorado);
+overflow-y:auto;
+z-index:2000;
 }
 
 #carritoPanel.abierto{
 right:0;
 }
 
+.itemCarrito{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#1a1a1a;
+padding:10px;
+border-radius:6px;
+margin-bottom:10px;
+}
+
+.itemCarrito button{
+background:var(--dorado);
+border:none;
+padding:4px 7px;
+border-radius:4px;
+cursor:pointer;
+}
+
+.total{
+font-size:20px;
+color:var(--dorado);
+margin:10px 0;
+}
+
+@media(max-width:600px){
+#buscador{
+max-width:200px;
+}
+}
 </style>
 </head>
 
 <body>
 
 <header>
-
-<div class="logo">
-Shine Bag y Accesorios
-</div>
+<div class="logo">Shine Bag</div>
 
 <input id="buscador" placeholder="Buscar carteras..." onkeyup="buscarProducto()">
 
-<div class="carrito" onclick="verCarrito()">
+<div class="carritoBtn" onclick="verCarrito()">
 🛒 <span id="contador">0</span>
 </div>
-
 </header>
 
 <section class="banner">
-<h1>Shine Bag</h1>
-<p>Carteras y accesorios elegantes</p>
+<h1>Shine Bag y Accesorios</h1>
+<p>Carteras elegantes y accesorios exclusivos</p>
 </section>
 
 <div class="filtros">
-
 <button onclick="filtrarPrecio(15000)">Hasta $15000</button>
 <button onclick="filtrarPrecio(20000)">Hasta $20000</button>
 <button onclick="mostrarTodo()">Todo</button>
-
 </div>
 
 <section class="productos" id="productos">
@@ -170,10 +225,8 @@ Shine Bag y Accesorios
 <h3>Cartera Shine Gold</h3>
 <div class="precio">$15000</div>
 <div class="estrellas">★★★★★</div>
-
 <button onclick="agregar('Cartera Shine Gold',15000)">Agregar</button>
 <button onclick="favorito('Cartera Shine Gold')">❤️</button>
-
 </div>
 
 <div class="producto" data-precio="18000">
@@ -181,10 +234,8 @@ Shine Bag y Accesorios
 <h3>Cartera Elegance</h3>
 <div class="precio">$18000</div>
 <div class="estrellas">★★★★☆</div>
-
 <button onclick="agregar('Cartera Elegance',18000)">Agregar</button>
 <button onclick="favorito('Cartera Elegance')">❤️</button>
-
 </div>
 
 <div class="producto" data-precio="12000">
@@ -192,29 +243,31 @@ Shine Bag y Accesorios
 <h3>Cartera Mini Shine</h3>
 <div class="precio">$12000</div>
 <div class="estrellas">★★★★★</div>
-
 <button onclick="agregar('Cartera Mini Shine',12000)">Agregar</button>
 <button onclick="favorito('Cartera Mini Shine')">❤️</button>
-
 </div>
 
 </section>
 
-
+<!-- carrito -->
 <div id="carritoPanel">
 
-<h2>Carrito</h2>
+<h2>Tu carrito</h2>
 
 <div id="listaCarrito"></div>
 
-<p>Total: $<span id="total">0</span></p>
+<hr>
 
-<button onclick="pagar()">Pagar</button>
+<div class="total">
+Total: $<span id="total">0</span>
+</div>
+
+<button onclick="vaciarCarrito()">Vaciar</button>
+<button onclick="pagar()">Finalizar compra</button>
 
 </div>
 
 <footer>
-
 <p>
 Instagram:
 <a href="https://instagram.com/shine_everyday.ok" target="_blank">
@@ -223,91 +276,111 @@ Instagram:
 </p>
 
 <p>© Shine Bag y Accesorios</p>
-
 </footer>
 
 <script>
 
 let carrito=[]
-let total=0
 
 function agregar(nombre,precio){
 
-carrito.push({nombre,precio})
+let prod=carrito.find(p=>p.nombre===nombre)
 
-total+=precio
+if(prod){
+prod.cantidad++
+}else{
+carrito.push({nombre,precio,cantidad:1})
+}
 
+actualizarCarrito()
+
+}
+
+function actualizarCarrito(){
+
+let lista=document.getElementById("listaCarrito")
+
+lista.innerHTML=""
+
+let total=0
+
+carrito.forEach((p,i)=>{
+
+total+=p.precio*p.cantidad
+
+lista.innerHTML+=`
+<div class="itemCarrito">
+
+<div>
+<b>${p.nombre}</b><br>
+$${p.precio}
+</div>
+
+<div>
+<button onclick="cambiarCantidad(${i},-1)">-</button>
+${p.cantidad}
+<button onclick="cambiarCantidad(${i},1)">+</button>
+<button onclick="eliminar(${i})">❌</button>
+</div>
+
+</div>
+`
+
+})
+
+document.getElementById("total").innerText=total
 document.getElementById("contador").innerText=carrito.length
 
 }
 
+function cambiarCantidad(i,c){
+carrito[i].cantidad+=c
+if(carrito[i].cantidad<=0) carrito.splice(i,1)
+actualizarCarrito()
+}
+
+function eliminar(i){
+carrito.splice(i,1)
+actualizarCarrito()
+}
+
+function vaciarCarrito(){
+carrito=[]
+actualizarCarrito()
+}
+
 function verCarrito(){
+document.getElementById("carritoPanel").classList.toggle("abierto")
+}
 
-let panel=document.getElementById("carritoPanel")
-
-panel.classList.toggle("abierto")
-
-let lista=""
-
-carrito.forEach(p=>{
-lista+=`<p>${p.nombre} $${p.precio}</p>`
-})
-
-document.getElementById("listaCarrito").innerHTML=lista
-document.getElementById("total").innerText=total
-
+function pagar(){
+window.location.href="https://mpago.la/2kSu3Mp"
 }
 
 function buscarProducto(){
 
-let input=document.getElementById("buscador").value.toLowerCase()
+let texto=document.getElementById("buscador").value.toLowerCase()
 
-let productos=document.querySelectorAll(".producto")
-
-productos.forEach(p=>{
-
+document.querySelectorAll(".producto").forEach(p=>{
 let nombre=p.innerText.toLowerCase()
-
-p.style.display=nombre.includes(input)?"block":"none"
-
+p.style.display=nombre.includes(texto)?"block":"none"
 })
 
 }
 
 function filtrarPrecio(max){
-
-let productos=document.querySelectorAll(".producto")
-
-productos.forEach(p=>{
-
-let precio=p.getAttribute("data-precio")
-
+document.querySelectorAll(".producto").forEach(p=>{
+let precio=p.dataset.precio
 p.style.display=precio<=max?"block":"none"
-
 })
-
 }
 
 function mostrarTodo(){
-
-let productos=document.querySelectorAll(".producto")
-
-productos.forEach(p=>{
-p.style.display="block"
-})
-
+document.querySelectorAll(".producto").forEach(p=>p.style.display="block")
 }
 
 function favorito(nombre){
-
 alert("Agregado a favoritos: "+nombre)
-
-}
-
-function pagar(){
-
-window.location.href="https://mpago.la/2kSu3Mp"
-
 }
 
 </script>
