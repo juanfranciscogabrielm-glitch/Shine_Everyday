@@ -1,193 +1,75 @@
+# Clonamos o creamos la carpeta local
+mkdir carteras-web
+cd carteras-web
+
+# Inicializamos git
+git init
+
+# Creamos archivo principal
+cat > index.html << EOL
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Shine-Everyday</title>
-
-<style>
-
-body{
-background:#121212;
-color:purple;
-font-style:italic;
-font-family:Arial;
-margin:0;
-}
-
-header{
-background:#000;
-padding:20px;
-text-align:center;
-}
-
-h1{
-color:purple;
-}
-
-.container{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-padding:20px;
-}
-
-.producto{
-background:#1e1e1e;
-width:300px;
-margin:20px;
-padding:15px;
-border-radius:10px;
-box-shadow:0 0 10px black;
-text-align:center;
-}
-
-.producto img{
-width:100%;
-border-radius:10px;
-}
-
-.miniaturas{
-display:flex;
-gap:5px;
-margin-top:5px;
-justify-content:center;
-}
-
-.miniaturas img{
-width:60px;
-cursor:pointer;
-}
-
-.precio{
-font-size:22px;
-font-weight:bold;
-}
-
-button{
-background:purple;
-color:white;
-border:none;
-padding:10px 15px;
-border-radius:5px;
-cursor:pointer;
-margin-top:10px;
-}
-
-button:hover{
-background:#6a0dad;
-}
-
-#carrito{
-position:fixed;
-top:10px;
-right:10px;
-background:#1e1e1e;
-padding:15px;
-border-radius:10px;
-width:200px;
-}
-
-.estrellas span{
-font-size:20px;
-cursor:pointer;
-}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carteras Mayorista</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    header { background: #f39c12; color: white; padding: 20px; text-align: center; }
+    .productos { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
+    .producto { border: 1px solid #ddd; margin: 10px; padding: 10px; width: 200px; text-align: center; }
+    .producto img { width: 100%; height: auto; }
+    footer { background: #333; color: white; text-align: center; padding: 10px; }
+    .btn { background: #27ae60; color: white; padding: 10px; text-decoration: none; display: inline-block; margin-top: 10px; }
+  </style>
 </head>
-
 <body>
 
 <header>
-<h1>Shine-Everyday</h1>
-<p>Elegancia que brilla todos los días</p>
+  <h1>Carteras Mayorista</h1>
+  <p>Venta de carteras al por mayor y menor</p>
 </header>
 
-<div id="carrito">
-<h3>Carrito</h3>
-<div id="lista"></div>
-<p>Total: $<span id="total">0</span></p>
-
-<button onclick="pagar()">Pagar</button>
-</div>
-
-<section class="container">
-
-<div class="producto">
-
-<img id="img1" src="IMG_9986.jpeg">
-
-<div class="miniaturas">
-<img src="IMG_9986.jpeg" onclick="cambiar('img1','IMG_9986.jpeg')">
-<img src="IMG_9990.jpeg" onclick="cambiar('img1','IMG_9990.jpeg')">
-<img src="IMG_9991.jpeg" onclick="cambiar('img1','IMG_9991.jpeg')">
-</div>
-
-<h3>Aura Noir</h3>
-
-<p class="precio">$38000</p>
-
-<button onclick="agregar('Aura Noir',38000)">
-Agregar al carrito
-</button>
-
-<div class="estrellas">
-<span onclick="rate(1)">⭐</span>
-<span onclick="rate(2)">⭐</span>
-<span onclick="rate(3)">⭐</span>
-<span onclick="rate(4)">⭐</span>
-<span onclick="rate(5)">⭐</span>
-</div>
-
-</div>
-
+<section class="productos">
+  <div class="producto">
+    <img src="cartera1.jpg" alt="Cartera Eco Cuero">
+    <h3>Cartera Eco Cuero</h3>
+    <p>$1500</p>
+    <a class="btn" href="https://wa.me/TU_NUMERO">Comprar por WhatsApp</a>
+  </div>
+  <div class="producto">
+    <img src="cartera2.jpg" alt="Bandolera Urbana">
+    <h3>Bandolera Urbana</h3>
+    <p>$1800</p>
+    <a class="btn" href="https://wa.me/TU_NUMERO">Comprar por WhatsApp</a>
+  </div>
+  <div class="producto">
+    <img src="cartera3.jpg" alt="Mochila Casual">
+    <h3>Mochila Casual</h3>
+    <p>$2000</p>
+    <a class="btn" href="https://wa.me/TU_NUMERO">Comprar por WhatsApp</a>
+  </div>
 </section>
 
-<script>
-
-let carrito=[]
-let total=0
-
-function cambiar(id,img){
-document.getElementById(id).src=img
-}
-
-function agregar(nombre,precio){
-
-carrito.push({nombre,precio})
-
-total+=precio
-
-document.getElementById("total").innerText=total
-
-let item=document.createElement("div")
-item.innerText=nombre+" $"+precio
-
-document.getElementById("lista").appendChild(item)
-
-}
-
-function pagar(){
-
-alert("Total a pagar: $"+total)
-
-window.open("https://mpago.la./2kSu3Mp")
-
-}
-
-function rate(n){
-
-alert("Gracias por tu reseña de "+n+" estrellas")
-
-}
-
-</script>
+<footer>
+  <p>Contactanos: WhatsApp +54 XXX XXX XXXX | Instagram @tuusuario</p>
+</footer>
 
 </body>
 </html>
+EOL
 
+# Creamos archivos de imagen de ejemplo
+touch cartera1.jpg cartera2.jpg cartera3.jpg
 
+# Commit inicial
+git add .
+git commit -m "Primera versión tienda de carteras"
+
+# Crear repositorio remoto (reemplaza TU_USUARIO y TU_REPO)
+git remote add origin https://github.com/TU_USUARIO/carteras-web.git
+git branch -M main
+git push -u origin main
 
 
 
