@@ -2,204 +2,103 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shine Bag y Accesorios</title>
 
 <style>
 
-:root{
---gold:#d4af37;
---dark:#111;
---gray:#f5f5f5;
-}
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
-}
-
 body{
-background:var(--gray);
-transition:.3s;
-}
-
-body.dark{
+margin:0;
+font-family:Arial;
 background:#0f0f0f;
 color:white;
 }
 
-/* HEADER */
-
 header{
-background:#111;
-color:white;
-padding:15px 40px;
 display:flex;
-align-items:center;
 justify-content:space-between;
-flex-wrap:wrap;
+align-items:center;
+padding:15px;
+background:black;
+border-bottom:2px solid #d4af37;
 }
 
 .logo{
-font-size:24px;
-color:var(--gold);
+font-size:22px;
 font-weight:bold;
+color:#d4af37;
 }
 
-.search{
-flex:1;
-max-width:400px;
-margin:10px;
-}
-
-.search input{
-width:100%;
+#buscador{
+width:40%;
 padding:10px;
-border-radius:6px;
-border:none;
-}
-
-/* BOTONES */
-
-.header-buttons{
-display:flex;
-gap:10px;
-}
-
-.btn{
-background:var(--gold);
-border:none;
-padding:8px 12px;
-border-radius:6px;
-cursor:pointer;
-font-weight:bold;
-}
-
-/* MENU */
-
-.menu{
-background:#1c1c1c;
-color:white;
-display:flex;
-gap:25px;
-padding:10px 40px;
-flex-wrap:wrap;
-}
-
-.menu a{
-color:white;
-text-decoration:none;
-}
-
-/* BANNER */
-
-.banner{
-height:250px;
-background:linear-gradient(90deg,#d4af37,#ffcc33);
-display:flex;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-font-size:30px;
-font-weight:bold;
-text-align:center;
-}
-
-.banner p{
-font-size:18px;
-margin-top:10px;
-}
-
-/* PRODUCTOS */
-
-.container{
-max-width:1300px;
-margin:auto;
-padding:30px;
-}
-
-.products{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-gap:25px;
-}
-
-.card{
-background:white;
-padding:15px;
 border-radius:8px;
-border:1px solid #ddd;
-text-align:center;
-}
-
-body.dark .card{
-background:#1c1c1c;
 border:none;
 }
 
-.card img{
+.carrito{
+cursor:pointer;
+font-size:20px;
+color:#d4af37;
+}
+
+.productos{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.producto{
+background:#1a1a1a;
+padding:15px;
+border-radius:10px;
+text-align:center;
+}
+
+.producto img{
 width:100%;
 height:180px;
-object-fit:contain;
+object-fit:cover;
+border-radius:10px;
 }
 
-.price{
-color:var(--gold);
-font-size:20px;
-font-weight:bold;
-margin:10px 0;
+.precio{
+color:#d4af37;
+font-size:18px;
 }
 
-/* ADMIN */
+button{
+background:#d4af37;
+border:none;
+padding:10px;
+border-radius:6px;
+cursor:pointer;
+}
 
-.admin{
-background:white;
+.estrellas{
+color:gold;
+}
+
+#panel{
+background:#000;
 padding:20px;
-margin:20px;
-border-radius:8px;
 }
 
-.admin input{
-padding:8px;
+#panel input{
 margin:5px;
+padding:8px;
 }
-
-/* CARRITO */
-
-.cartBox{
-position:fixed;
-right:0;
-top:0;
-width:320px;
-height:100%;
-background:white;
-border-left:1px solid #ccc;
-padding:20px;
-overflow:auto;
-display:none;
-}
-
-body.dark .cartBox{
-background:#1c1c1c;
-}
-
-/* FOOTER */
 
 footer{
-background:#111;
-color:white;
-padding:30px;
 text-align:center;
-margin-top:40px;
+padding:20px;
+border-top:2px solid #d4af37;
 }
 
-footer a{
-color:var(--gold);
+a{
+color:#d4af37;
 text-decoration:none;
-font-weight:bold;
 }
 
 </style>
@@ -209,210 +108,148 @@ font-weight:bold;
 
 <header>
 
-<div class="logo">Shine Bag y Accesorios</div>
-
-<div class="search">
-<input placeholder="Buscar carteras o accesorios..." onkeyup="searchProducts()">
+<div class="logo">
+Shine Bag y Accesorios
 </div>
 
-<div class="header-buttons">
+<input id="buscador" placeholder="Buscar carteras..." onkeyup="buscarProducto()">
 
-<button class="btn" onclick="toggleCart()">🛒</button>
-
-<button class="btn" onclick="toggleDark()">🌙</button>
-
-<a href="https://instagram.com/shine_everyday.ok" target="_blank">
-<button class="btn">Instagram</button>
-</a>
-
+<div class="carrito" onclick="verCarrito()">
+🛒 <span id="contador">0</span>
 </div>
 
 </header>
 
-<div class="menu">
 
-<a href="#">Inicio</a>
-<a href="#">Carteras</a>
-<a href="#">Accesorios</a>
-<a href="#">Ofertas</a>
-<a href="#">Contacto</a>
+<section class="productos" id="productos">
 
+<div class="producto">
+<img src="https://i.imgur.com/2DhmtJ4.jpg">
+<h3>Cartera Shine Gold</h3>
+<div class="precio">$15000</div>
+<div class="estrellas">★★★★★</div>
+<button onclick="agregar('Cartera Shine Gold',15000)">Agregar</button>
 </div>
 
-<div class="banner">
-
-Shine Bag y Accesorios
-
-<p>Carteras y accesorios con estilo</p>
-
+<div class="producto">
+<img src="https://i.imgur.com/8Km9tLL.jpg">
+<h3>Cartera Elegance</h3>
+<div class="precio">$18000</div>
+<div class="estrellas">★★★★☆</div>
+<button onclick="agregar('Cartera Elegance',18000)">Agregar</button>
 </div>
 
-<div class="container">
-
-<div class="products" id="products"></div>
-
+<div class="producto">
+<img src="https://i.imgur.com/F3QxPpP.jpg">
+<h3>Cartera Mini Shine</h3>
+<div class="precio">$12000</div>
+<div class="estrellas">★★★★★</div>
+<button onclick="agregar('Cartera Mini Shine',12000)">Agregar</button>
 </div>
 
-<div class="admin">
+</section>
 
-<h3>Panel administrador</h3>
 
-<input id="name" placeholder="Nombre del producto">
-<input id="price" placeholder="Precio">
-<input id="image" placeholder="URL de imagen">
+<section id="panel">
 
-<button class="btn" onclick="addProduct()">Agregar producto</button>
+<h2>Panel subir producto</h2>
 
-</div>
+<input id="nombre" placeholder="Nombre producto">
+<input id="precio" placeholder="Precio">
+<input id="imagen" placeholder="URL imagen">
 
-<div class="cartBox" id="cartBox">
+<button onclick="subirProducto()">Subir producto</button>
 
-<h3>Carrito</h3>
+</section>
 
-<div id="cartItems"></div>
-
-<h3>Total: $<span id="total">0</span></h3>
-
-<a href="https://mpago.la/2kSu3Mp">
-
-<button class="btn">
-Pagar con Mercado Pago
-</button>
-
-</a>
-
-</div>
 
 <footer>
 
-Síguenos en Instagram  
-<br><br>
-
+<p>
+Instagram:
 <a href="https://instagram.com/shine_everyday.ok" target="_blank">
 @shine_everyday.ok
 </a>
+</p>
+
+<p>© Shine Bag y Accesorios</p>
 
 </footer>
 
+
 <script>
 
-let products=JSON.parse(localStorage.getItem("products"))||[];
-let cart=JSON.parse(localStorage.getItem("cart"))||[];
+let carrito=[]
+let total=0
 
-function save(){
-localStorage.setItem("products",JSON.stringify(products));
-localStorage.setItem("cart",JSON.stringify(cart));
+function agregar(nombre,precio){
+
+carrito.push({nombre,precio})
+
+total+=precio
+
+document.getElementById("contador").innerText=carrito.length
+
 }
 
-function renderProducts(){
+function verCarrito(){
 
-let container=document.getElementById("products");
+let lista=""
 
-container.innerHTML="";
+carrito.forEach(p=>{
+lista+=p.nombre+" $"+p.precio+"\n"
+})
 
-products.forEach((p,i)=>{
+alert(lista+"\nTotal: $"+total)
 
-container.innerHTML+=`
+}
 
-<div class="card">
+function buscarProducto(){
 
-<img src="${p.image}">
+let input=document.getElementById("buscador").value.toLowerCase()
 
-<h3>${p.name}</h3>
+let productos=document.querySelectorAll(".producto")
 
-<div>⭐⭐⭐⭐⭐</div>
+productos.forEach(p=>{
 
-<div class="price">$${p.price}</div>
+let nombre=p.innerText.toLowerCase()
 
-<button class="btn" onclick="addCart(${i})">
-Agregar al carrito
-</button>
+p.style.display=nombre.includes(input)?"block":"none"
 
+})
+
+}
+
+function subirProducto(){
+
+let nombre=document.getElementById("nombre").value
+let precio=document.getElementById("precio").value
+let imagen=document.getElementById("imagen").value
+
+let contenedor=document.getElementById("productos")
+
+contenedor.innerHTML+=`
+
+<div class="producto">
+<img src="${imagen}">
+<h3>${nombre}</h3>
+<div class="precio">$${precio}</div>
+<div class="estrellas">★★★★★</div>
+<button onclick="agregar('${nombre}',${precio})">Agregar</button>
 </div>
 
-`;
-
-});
+`
 
 }
 
-function addProduct(){
+function pagar(){
 
-let name=document.getElementById("name").value;
-let price=document.getElementById("price").value;
-let image=document.getElementById("image").value;
-
-products.push({name,price,image});
-
-save();
-renderProducts();
+window.location.href="https://mpago.la/2kSu3Mp"
 
 }
-
-function addCart(i){
-
-cart.push(products[i]);
-
-save();
-renderCart();
-
-}
-
-function renderCart(){
-
-let items=document.getElementById("cartItems");
-
-let total=0;
-
-items.innerHTML="";
-
-cart.forEach(p=>{
-
-items.innerHTML+=`<p>${p.name} - $${p.price}</p>`;
-total+=Number(p.price);
-
-});
-
-document.getElementById("total").innerText=total;
-
-}
-
-function toggleCart(){
-
-let c=document.getElementById("cartBox");
-
-c.style.display=c.style.display==="block"?"none":"block";
-
-renderCart();
-
-}
-
-function toggleDark(){
-
-document.body.classList.toggle("dark");
-
-}
-
-function searchProducts(){
-
-let input=document.querySelector(".search input").value.toLowerCase();
-
-let cards=document.querySelectorAll(".card");
-
-cards.forEach(card=>{
-
-let name=card.querySelector("h3").innerText.toLowerCase();
-
-card.style.display=name.includes(input)?"block":"none";
-
-});
-
-}
-
-renderProducts();
-renderCart();
 
 </script>
 
 </body>
 </html>
+
