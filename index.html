@@ -2,17 +2,15 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tienda Mayorista</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Shine Bag y Accesorios</title>
 
 <style>
-
-/* VARIABLES */
 
 :root{
 --gold:#d4af37;
 --dark:#111;
---light:#ffffff;
 --gray:#f5f5f5;
 }
 
@@ -25,10 +23,8 @@ font-family:Arial;
 
 body{
 background:var(--gray);
-transition:0.3s;
+transition:.3s;
 }
-
-/* MODO OSCURO */
 
 body.dark{
 background:#0f0f0f;
@@ -38,7 +34,7 @@ color:white;
 /* HEADER */
 
 header{
-background:var(--dark);
+background:#111;
 color:white;
 padding:15px 40px;
 display:flex;
@@ -66,7 +62,7 @@ border-radius:6px;
 border:none;
 }
 
-/* BOTONES HEADER */
+/* BOTONES */
 
 .header-buttons{
 display:flex;
@@ -96,7 +92,6 @@ flex-wrap:wrap;
 .menu a{
 color:white;
 text-decoration:none;
-font-size:14px;
 }
 
 /* BANNER */
@@ -107,19 +102,24 @@ background:linear-gradient(90deg,#d4af37,#ffcc33);
 display:flex;
 align-items:center;
 justify-content:center;
+flex-direction:column;
 font-size:30px;
 font-weight:bold;
+text-align:center;
 }
 
-/* CONTENEDOR */
+.banner p{
+font-size:18px;
+margin-top:10px;
+}
+
+/* PRODUCTOS */
 
 .container{
 max-width:1300px;
 margin:auto;
 padding:30px;
 }
-
-/* PRODUCTOS */
 
 .products{
 display:grid;
@@ -153,26 +153,7 @@ font-weight:bold;
 margin:10px 0;
 }
 
-/* CARRITO */
-
-.cartBox{
-position:fixed;
-right:0;
-top:0;
-width:300px;
-height:100%;
-background:white;
-border-left:1px solid #ccc;
-padding:20px;
-overflow:auto;
-display:none;
-}
-
-body.dark .cartBox{
-background:#1c1c1c;
-}
-
-/* PANEL ADMIN */
+/* ADMIN */
 
 .admin{
 background:white;
@@ -186,14 +167,39 @@ padding:8px;
 margin:5px;
 }
 
+/* CARRITO */
+
+.cartBox{
+position:fixed;
+right:0;
+top:0;
+width:320px;
+height:100%;
+background:white;
+border-left:1px solid #ccc;
+padding:20px;
+overflow:auto;
+display:none;
+}
+
+body.dark .cartBox{
+background:#1c1c1c;
+}
+
 /* FOOTER */
 
 footer{
 background:#111;
 color:white;
-text-align:center;
 padding:30px;
+text-align:center;
 margin-top:40px;
+}
+
+footer a{
+color:var(--gold);
+text-decoration:none;
+font-weight:bold;
 }
 
 </style>
@@ -203,10 +209,10 @@ margin-top:40px;
 
 <header>
 
-<div class="logo">Tienda Gold</div>
+<div class="logo">Shine Bag y Accesorios</div>
 
 <div class="search">
-<input placeholder="Buscar productos..." onkeyup="searchProducts()">
+<input placeholder="Buscar carteras o accesorios..." onkeyup="searchProducts()">
 </div>
 
 <div class="header-buttons">
@@ -215,7 +221,7 @@ margin-top:40px;
 
 <button class="btn" onclick="toggleDark()">🌙</button>
 
-<a href="https://instagram.com" target="_blank">
+<a href="https://instagram.com/shine_everyday.ok" target="_blank">
 <button class="btn">Instagram</button>
 </a>
 
@@ -226,16 +232,19 @@ margin-top:40px;
 <div class="menu">
 
 <a href="#">Inicio</a>
+<a href="#">Carteras</a>
+<a href="#">Accesorios</a>
 <a href="#">Ofertas</a>
-<a href="#">Tecnología</a>
-<a href="#">Ropa</a>
-<a href="#">Hogar</a>
 <a href="#">Contacto</a>
 
 </div>
 
 <div class="banner">
-OFERTAS MAYORISTAS
+
+Shine Bag y Accesorios
+
+<p>Carteras y accesorios con estilo</p>
+
 </div>
 
 <div class="container">
@@ -244,21 +253,17 @@ OFERTAS MAYORISTAS
 
 </div>
 
-<!-- PANEL ADMIN -->
-
 <div class="admin">
 
 <h3>Panel administrador</h3>
 
-<input id="name" placeholder="Nombre producto">
+<input id="name" placeholder="Nombre del producto">
 <input id="price" placeholder="Precio">
-<input id="image" placeholder="URL imagen">
+<input id="image" placeholder="URL de imagen">
 
 <button class="btn" onclick="addProduct()">Agregar producto</button>
 
 </div>
-
-<!-- CARRITO -->
 
 <div class="cartBox" id="cartBox">
 
@@ -280,14 +285,19 @@ Pagar con Mercado Pago
 
 <footer>
 
-Síguenos en Instagram
+Síguenos en Instagram  
+<br><br>
+
+<a href="https://instagram.com/shine_everyday.ok" target="_blank">
+@shine_everyday.ok
+</a>
 
 </footer>
 
 <script>
 
-let products = JSON.parse(localStorage.getItem("products")) || [];
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let products=JSON.parse(localStorage.getItem("products"))||[];
+let cart=JSON.parse(localStorage.getItem("cart"))||[];
 
 function save(){
 localStorage.setItem("products",JSON.stringify(products));
@@ -297,6 +307,7 @@ localStorage.setItem("cart",JSON.stringify(cart));
 function renderProducts(){
 
 let container=document.getElementById("products");
+
 container.innerHTML="";
 
 products.forEach((p,i)=>{
@@ -350,6 +361,7 @@ renderCart();
 function renderCart(){
 
 let items=document.getElementById("cartItems");
+
 let total=0;
 
 items.innerHTML="";
@@ -367,11 +379,17 @@ document.getElementById("total").innerText=total;
 
 function toggleCart(){
 
-let cart=document.getElementById("cartBox");
+let c=document.getElementById("cartBox");
 
-cart.style.display=cart.style.display=="block"?"none":"block";
+c.style.display=c.style.display==="block"?"none":"block";
 
 renderCart();
+
+}
+
+function toggleDark(){
+
+document.body.classList.toggle("dark");
 
 }
 
@@ -388,12 +406,6 @@ let name=card.querySelector("h3").innerText.toLowerCase();
 card.style.display=name.includes(input)?"block":"none";
 
 });
-
-}
-
-function toggleDark(){
-
-document.body.classList.toggle("dark");
 
 }
 
