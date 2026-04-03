@@ -25,8 +25,8 @@ border-bottom:2px solid #d4af37;
 
 .logo{
 font-size:22px;
-font-weight:bold;
 color:#d4af37;
+font-weight:bold;
 }
 
 #buscador{
@@ -42,9 +42,26 @@ font-size:20px;
 color:#d4af37;
 }
 
+.banner{
+text-align:center;
+padding:40px;
+background:#111;
+border-bottom:2px solid #d4af37;
+}
+
+.banner h1{
+color:#d4af37;
+font-size:38px;
+}
+
+.filtros{
+padding:10px;
+text-align:center;
+}
+
 .productos{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:20px;
 padding:20px;
 }
@@ -54,6 +71,11 @@ background:#1a1a1a;
 padding:15px;
 border-radius:10px;
 text-align:center;
+transition:0.3s;
+}
+
+.producto:hover{
+transform:scale(1.05);
 }
 
 .producto img{
@@ -68,26 +90,17 @@ color:#d4af37;
 font-size:18px;
 }
 
+.estrellas{
+color:gold;
+}
+
 button{
 background:#d4af37;
 border:none;
 padding:10px;
 border-radius:6px;
 cursor:pointer;
-}
-
-.estrellas{
-color:gold;
-}
-
-#panel{
-background:#000;
-padding:20px;
-}
-
-#panel input{
 margin:5px;
-padding:8px;
 }
 
 footer{
@@ -99,6 +112,23 @@ border-top:2px solid #d4af37;
 a{
 color:#d4af37;
 text-decoration:none;
+}
+
+#carritoPanel{
+position:fixed;
+right:-320px;
+top:0;
+width:300px;
+height:100%;
+background:#111;
+padding:20px;
+transition:0.3s;
+border-left:2px solid #d4af37;
+overflow:auto;
+}
+
+#carritoPanel.abierto{
+right:0;
 }
 
 </style>
@@ -120,37 +150,71 @@ Shine Bag y Accesorios
 
 </header>
 
+<section class="banner">
+<h1>Shine Bag</h1>
+<p>Carteras y accesorios elegantes</p>
+</section>
+
+<div class="filtros">
+
+<button onclick="filtrarPrecio(15000)">Hasta $15000</button>
+<button onclick="filtrarPrecio(20000)">Hasta $20000</button>
+<button onclick="mostrarTodo()">Todo</button>
+
+</div>
 
 <section class="productos" id="productos">
 
-<div class="producto">
+<div class="producto" data-precio="15000">
 <img src="https://i.imgur.com/2DhmtJ4.jpg">
 <h3>Cartera Shine Gold</h3>
 <div class="precio">$15000</div>
 <div class="estrellas">★★★★★</div>
+
 <button onclick="agregar('Cartera Shine Gold',15000)">Agregar</button>
+<button onclick="favorito('Cartera Shine Gold')">❤️</button>
+
 </div>
 
-<div class="producto">
+<div class="producto" data-precio="18000">
 <img src="https://i.imgur.com/8Km9tLL.jpg">
 <h3>Cartera Elegance</h3>
 <div class="precio">$18000</div>
 <div class="estrellas">★★★★☆</div>
+
 <button onclick="agregar('Cartera Elegance',18000)">Agregar</button>
+<button onclick="favorito('Cartera Elegance')">❤️</button>
+
 </div>
 
-<div class="producto">
+<div class="producto" data-precio="12000">
 <img src="https://i.imgur.com/F3QxPpP.jpg">
 <h3>Cartera Mini Shine</h3>
 <div class="precio">$12000</div>
 <div class="estrellas">★★★★★</div>
+
 <button onclick="agregar('Cartera Mini Shine',12000)">Agregar</button>
+<button onclick="favorito('Cartera Mini Shine')">❤️</button>
+
 </div>
 
+</section>
+
+
+<div id="carritoPanel">
+
+<h2>Carrito</h2>
+
+<div id="listaCarrito"></div>
+
+<p>Total: $<span id="total">0</span></p>
+
+<button onclick="pagar()">Pagar</button>
+
+</div>
 
 <footer>
 
-  
 <p>
 Instagram:
 <a href="https://instagram.com/shine_everyday.ok" target="_blank">
@@ -161,7 +225,6 @@ Instagram:
 <p>© Shine Bag y Accesorios</p>
 
 </footer>
-
 
 <script>
 
@@ -180,13 +243,18 @@ document.getElementById("contador").innerText=carrito.length
 
 function verCarrito(){
 
+let panel=document.getElementById("carritoPanel")
+
+panel.classList.toggle("abierto")
+
 let lista=""
 
 carrito.forEach(p=>{
-lista+=p.nombre+" $"+p.precio+"\n"
+lista+=`<p>${p.nombre} $${p.precio}</p>`
 })
 
-alert(lista+"\nTotal: $"+total)
+document.getElementById("listaCarrito").innerHTML=lista
+document.getElementById("total").innerText=total
 
 }
 
@@ -206,25 +274,33 @@ p.style.display=nombre.includes(input)?"block":"none"
 
 }
 
-function subirProducto(){
+function filtrarPrecio(max){
 
-let nombre=document.getElementById("nombre").value
-let precio=document.getElementById("precio").value
-let imagen=document.getElementById("imagen").value
+let productos=document.querySelectorAll(".producto")
 
-let contenedor=document.getElementById("productos")
+productos.forEach(p=>{
 
-contenedor.innerHTML+=`
+let precio=p.getAttribute("data-precio")
 
-<div class="producto">
-<img src="${imagen}">
-<h3>${nombre}</h3>
-<div class="precio">$${precio}</div>
-<div class="estrellas">★★★★★</div>
-<button onclick="agregar('${nombre}',${precio})">Agregar</button>
-</div>
+p.style.display=precio<=max?"block":"none"
 
-`
+})
+
+}
+
+function mostrarTodo(){
+
+let productos=document.querySelectorAll(".producto")
+
+productos.forEach(p=>{
+p.style.display="block"
+})
+
+}
+
+function favorito(nombre){
+
+alert("Agregado a favoritos: "+nombre)
 
 }
 
@@ -238,4 +314,3 @@ window.location.href="https://mpago.la/2kSu3Mp"
 
 </body>
 </html>
-
