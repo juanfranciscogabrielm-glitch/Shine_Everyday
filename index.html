@@ -1,389 +1,104 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shine Bag y Accesorios</title>
-
-<style>
-:root{
-  --dorado:#d4af37;
-  --fondo:#0f0f0f;
-  --card:#1a1a1a;
-}
-
-*{box-sizing:border-box}
-
-body{
-margin:0;
-font-family:Arial, Helvetica, sans-serif;
-background:var(--fondo);
-color:white;
-}
-
-header{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px;
-padding:12px 16px;
-background:#000;
-border-bottom:2px solid var(--dorado);
-position:sticky;
-top:0;
-z-index:1000;
-}
-
-.logo{
-font-size:22px;
-font-weight:bold;
-color:var(--dorado);
-}
-
-#buscador{
-flex:1;
-max-width:450px;
-padding:10px;
-border-radius:8px;
-border:none;
-outline:none;
-}
-
-.carritoBtn{
-cursor:pointer;
-color:var(--dorado);
-font-size:18px;
-}
-
-.banner{
-text-align:center;
-padding:35px 15px;
-background:#111;
-border-bottom:2px solid var(--dorado);
-}
-
-.banner h1{
-margin:0;
-font-size:36px;
-color:var(--dorado);
-}
-
-.banner p{
-opacity:.8;
-}
-
-.filtros{
-text-align:center;
-padding:12px;
-}
-
-.filtros button{
-margin:5px;
-padding:8px 12px;
-border:none;
-border-radius:6px;
-background:var(--dorado);
-cursor:pointer;
-}
-
-.productos{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-padding:20px;
-}
-
-.producto{
-background:var(--card);
-padding:15px;
-border-radius:10px;
-text-align:center;
-transition:.25s;
-}
-
-.producto:hover{
-transform:scale(1.05);
-}
-
-.producto img{
-width:100%;
-height:180px;
-object-fit:cover;
-border-radius:8px;
-}
-
-.precio{
-color:var(--dorado);
-font-size:18px;
-margin:5px 0;
-}
-
-.estrellas{
-color:gold;
-}
-
-.producto button{
-margin:5px;
-padding:8px 10px;
-border:none;
-border-radius:6px;
-background:var(--dorado);
-cursor:pointer;
-}
-
-footer{
-text-align:center;
-padding:20px;
-border-top:2px solid var(--dorado);
-margin-top:20px;
-}
-
-footer a{
-color:var(--dorado);
-text-decoration:none;
-}
-
-/* carrito */
-
-#carritoPanel{
-position:fixed;
-right:-360px;
-top:0;
-width:330px;
-height:100%;
-background:#111;
-padding:20px;
-transition:.35s;
-border-left:3px solid var(--dorado);
-overflow-y:auto;
-z-index:2000;
-}
-
-#carritoPanel.abierto{
-right:0;
-}
-
-.itemCarrito{
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:#1a1a1a;
-padding:10px;
-border-radius:6px;
-margin-bottom:10px;
-}
-
-.itemCarrito button{
-background:var(--dorado);
-border:none;
-padding:4px 7px;
-border-radius:4px;
-cursor:pointer;
-}
-
-.total{
-font-size:20px;
-color:var(--dorado);
-margin:10px 0;
-}
-
-@media(max-width:600px){
-#buscador{
-max-width:200px;
-}
-}
-</style>
-</head>
-
-<body>
-
-<header>
-<div class="logo">Shine Bag</div>
-
-<input id="buscador" placeholder="Buscar carteras..." onkeyup="buscarProducto()">
-
-<div class="carritoBtn" onclick="verCarrito()">
-🛒 <span id="contador">0</span>
-</div>
-</header>
-
-<section class="banner">
-<h1>Shine Bag y Accesorios</h1>
-<p>Carteras elegantes y accesorios exclusivos</p>
-</section>
-
-<div class="filtros">
-<button onclick="filtrarPrecio(15000)">Hasta $15000</button>
-<button onclick="filtrarPrecio(20000)">Hasta $20000</button>
-<button onclick="mostrarTodo()">Todo</button>
-</div>
-
-<section class="productos" id="productos">
-
-<div class="producto" data-precio="15000">
-<img src="https://i.imgur.com/2DhmtJ4.jpg">
-<h3>Cartera Shine Gold</h3>
-<div class="precio">$15000</div>
-<div class="estrellas">★★★★★</div>
-<button onclick="agregar('Cartera Shine Gold',15000)">Agregar</button>
-<button onclick="favorito('Cartera Shine Gold')">❤️</button>
-</div>
-
-<div class="producto" data-precio="18000">
-<img src="https://i.imgur.com/8Km9tLL.jpg">
-<h3>Cartera Elegance</h3>
-<div class="precio">$18000</div>
-<div class="estrellas">★★★★☆</div>
-<button onclick="agregar('Cartera Elegance',18000)">Agregar</button>
-<button onclick="favorito('Cartera Elegance')">❤️</button>
-</div>
-
-<div class="producto" data-precio="12000">
-<img src="https://i.imgur.com/F3QxPpP.jpg">
-<h3>Cartera Mini Shine</h3>
-<div class="precio">$12000</div>
-<div class="estrellas">★★★★★</div>
-<button onclick="agregar('Cartera Mini Shine',12000)">Agregar</button>
-<button onclick="favorito('Cartera Mini Shine')">❤️</button>
-</div>
-
-</section>
-
-<!-- carrito -->
-<div id="carritoPanel">
-
-<h2>Tu carrito</h2>
-
-<div id="listaCarrito"></div>
-
-<hr>
-
-<div class="total">
-Total: $<span id="total">0</span>
-</div>
-
-<button onclick="vaciarCarrito()">Vaciar</button>
-<button onclick="pagar()">Finalizar compra</button>
-
-</div>
-
-<footer>
-<p>
-Instagram:
-<a href="https://instagram.com/shine_everyday.ok" target="_blank">
-@shine_everyday.ok
-</a>
-</p>
-
-<p>© Shine Bag y Accesorios</p>
-</footer>
-
-<script>
-
-let carrito=[]
-
-function agregar(nombre,precio){
-
-let prod=carrito.find(p=>p.nombre===nombre)
-
-if(prod){
-prod.cantidad++
-}else{
-carrito.push({nombre,precio,cantidad:1})
-}
-
-actualizarCarrito()
-
-}
-
-function actualizarCarrito(){
-
-let lista=document.getElementById("listaCarrito")
-
-lista.innerHTML=""
-
-let total=0
-
-carrito.forEach((p,i)=>{
-
-total+=p.precio*p.cantidad
-
-lista.innerHTML+=`
-<div class="itemCarrito">
-
-<div>
-<b>${p.nombre}</b><br>
-$${p.precio}
-</div>
-
-<div>
-<button onclick="cambiarCantidad(${i},-1)">-</button>
-${p.cantidad}
-<button onclick="cambiarCantidad(${i},1)">+</button>
-<button onclick="eliminar(${i})">❌</button>
-</div>
-
-</div>
-`
-
-})
-
-document.getElementById("total").innerText=total
-document.getElementById("contador").innerText=carrito.length
-
-}
-
-function cambiarCantidad(i,c){
-carrito[i].cantidad+=c
-if(carrito[i].cantidad<=0) carrito.splice(i,1)
-actualizarCarrito()
-}
-
-function eliminar(i){
-carrito.splice(i,1)
-actualizarCarrito()
-}
-
-function vaciarCarrito(){
-carrito=[]
-actualizarCarrito()
-}
-
-function verCarrito(){
-document.getElementById("carritoPanel").classList.toggle("abierto")
-}
-
-function pagar(){
-window.location.href="https://mpago.la/2kSu3Mp"
-}
-
-function buscarProducto(){
-
-let texto=document.getElementById("buscador").value.toLowerCase()
-
-document.querySelectorAll(".producto").forEach(p=>{
-let nombre=p.innerText.toLowerCase()
-p.style.display=nombre.includes(texto)?"block":"none"
-})
-
-}
-
-function filtrarPrecio(max){
-document.querySelectorAll(".producto").forEach(p=>{
-let precio=p.dataset.precio
-p.style.display=precio<=max?"block":"none"
-})
-}
-
-function mostrarTodo(){
-document.querySelectorAll(".producto").forEach(p=>p.style.display="block")
-}
-
-function favorito(nombre){
-alert("Agregado a favoritos: "+nombre)
-}
-
-</script>
-
-</body>
-</html>
+Build a complete modern luxury handbag e-commerce website called "Shine Bag".
+
+Tech stack:
+HTML5, CSS3, JavaScript (vanilla).
+
+Design inspiration:
+Luxury fashion brand websites such as Louis Vuitton or high-end handbag stores. 
+Clean, elegant, minimal UI with modern animations.
+
+Main Features:
+
+HEADER
+- Logo: Shine Bag
+- Navigation:
+  Home
+  Shop
+  New Arrivals
+  Best Sellers
+  Instagram
+- Icons:
+  Search
+  User account
+  Shopping cart
+
+HERO SECTION
+- Full width banner
+- Dark elegant background
+- Fashion model with handbags
+- Large luxury typography
+
+Text:
+Shine Bag
+Elegancia que brilla contigo
+
+Button:
+Comprar ahora
+
+PRODUCT SECTION (New Arrivals)
+- 4 product cards per row
+- Each card includes:
+  product image
+  product title
+  price
+  add to cart button
+  favorite heart icon
+- Hover animation
+
+BEST SELLERS
+- Grid layout with large product images
+- Elegant spacing and shadows
+
+COLLECTION SECTION
+- Colored background cards with handbags
+- Pastel colors:
+  green
+  beige
+  blue
+  pink
+  orange
+
+SHOPPING CART
+- JavaScript functionality
+- Add products
+- Remove products
+- Update quantity
+- Show total price
+- Cart icon with item counter
+
+STYLE
+- Luxury typography
+- Colors:
+  black
+  white
+  beige
+  light gray
+  gold accents
+
+ANIMATIONS
+- Smooth hover effects
+- Fade in sections
+- Button hover transitions
+
+FOOTER
+- Instagram: shine_everyday.ok
+- Brand: Shine Bag
+- Links:
+  Contact
+  About
+  Terms
+
+RESPONSIVE DESIGN
+- Desktop
+- Tablet
+- Mobile
+
+Project structure:
+
+shine-bag-store/
+index.html
+style.css
+script.js
+assets/images/
+
+Make the design look premium, modern and similar to luxury fashion e-commerce websites.
